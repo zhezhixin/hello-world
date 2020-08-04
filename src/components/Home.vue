@@ -1,0 +1,18 @@
+<template>
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png">
+    <p>
+    <router-link to="/helloworld">go to helloworld</router-link> |  
+    <router-link to="/todo">go to todolist</router-link>
+    </p>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+//import HelloWorld from '@/components/HelloWorld.vue'
+
+export default {
+  name: 'Home',
+}
+</script>
