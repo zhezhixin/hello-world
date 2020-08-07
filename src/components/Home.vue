@@ -4,6 +4,7 @@
     <p>
     <router-link to="/helloworld">go to helloworld</router-link> |  
     <router-link to="/todo">go to todolist</router-link>
+    <router-link to="others">go to others</router-link>
     </p>
   </div>
 </template>
