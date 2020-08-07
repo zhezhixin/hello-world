@@ -19,6 +19,11 @@ export default new VueRouter({
       path: '/helloworld',
       name: 'Helloworld',
       component: () => import('@/components/HelloWorld.vue')
+    },
+    {
+      path: '/others',
+      name: 'others',
+      component: () => import('@/others/Index.vue')
     }
   ]
 }) 
