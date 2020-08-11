@@ -10,6 +10,7 @@
     </Storetest>
     <Ditu>
     </Ditu>
+    <wait></wait>
     <router-link to='/'>返回</router-link>
   </div>
 </template>
@@ -17,11 +18,13 @@
 <script>
 import Storetest from '@/others/Storetest.vue'
 import Ditu from '@/others/Ditu.vue'
+import Wait from '@/others/Wait.vue'
 export default {
   name: 'Others',
   components: {
       Storetest,
-      Ditu
+      Ditu,
+      Wait
   }
 }
 </script>
