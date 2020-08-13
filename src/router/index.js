@@ -24,6 +24,16 @@ export default new VueRouter({
       path: '/others',
       name: 'others',
       component: () => import('@/others/Index.vue')
+    },
+    {
+      path: '/echarts',
+      name: 'echarts',
+      component: () => import('@/ech/Index.vue')
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: () => import('@/map/Index.vue')
     }
   ]
 }) 
