@@ -34,7 +34,12 @@ export default new VueRouter({
       path: '/map',
       name: 'map',
       component: () => import('@/map/Index.vue')
-    }
+    },
+    {
+      path: '/fanpai',
+      name: 'fanpai',
+      component: () => import('@/fanpai/Index.vue')
+    },
   ]
 }) 
 
