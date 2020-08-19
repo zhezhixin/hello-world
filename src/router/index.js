@@ -40,6 +40,16 @@ export default new VueRouter({
       name: 'fanpai',
       component: () => import('@/fanpai/Index.vue')
     },
+    {
+      path: '/css',
+      name: 'css',
+      component: () => import('@/css/Index.vue')
+    },
+    {
+      path: '/cssblog',
+      name: 'cssblog',
+      component: () => import('@/css/MyBlog.vue')
+    },
   ]
 }) 
 

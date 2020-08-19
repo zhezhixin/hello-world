@@ -17,10 +17,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
-
+body,ul,ol,p,h1,h2,h3,h4,h5,h6,dl,dd,select,input,textarea,form{margin:0;padding:0}
+li{list-style: none;}
+a{text-decoration: none;}
 #nav {
   padding: 30px;
 

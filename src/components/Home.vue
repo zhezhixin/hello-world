@@ -5,9 +5,13 @@
     <router-link to="/helloworld">go to helloworld</router-link> |  
     <router-link to="/todo">go to todolist</router-link> | 
     <router-link to="/others">go to others</router-link> | 
+    <br>
     <router-link to="/echarts"> go to echarts </router-link> | 
     <router-link to="/map"> go to baidumap </router-link> | 
     <router-link to="/fanpai"> go to fanpai </router-link>
+    <br>
+    <router-link to="/css"> go to css </router-link> | 
+    <router-link to="/cssblog"> go to myblog </router-link>
     </p>
   </div>
 </template>
