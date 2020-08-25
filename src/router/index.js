@@ -50,6 +50,11 @@ export default new VueRouter({
       name: 'cssblog',
       component: () => import('@/css/MyBlog.vue')
     },
+    {
+      path: '/axios',
+      name: 'axios',
+      component: () => import('@/myaxios/Index.vue')
+    }
   ]
 }) 
 

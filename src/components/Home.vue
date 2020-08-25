@@ -11,7 +11,8 @@
     <router-link to="/fanpai"> go to fanpai </router-link>
     <br>
     <router-link to="/css"> go to css </router-link> | 
-    <router-link to="/cssblog"> go to myblog </router-link>
+    <router-link to="/cssblog"> go to myblog </router-link> |
+    <router-link to="/axios">go to axios </router-link>
     </p>
   </div>
 </template>
