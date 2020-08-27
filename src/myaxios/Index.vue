@@ -25,17 +25,27 @@
 
                 </section>
             </div>
-           <div>{{text}}</div>
+            <router-view></router-view>
+            <div>{{text}}</div>
 
-           <button @click="clickHandler">点击</button>
-           <div
+            <button @click="clickHandler">点击</button>
+            <div
                 class="currency"
                 v-for="(content,index) in msg"
                 :key="index"
-           >
+            >
                 <span class="lighten">{{content.id}}</span>
                 <span class="lighten">{{content.name}}</span>
-           </div>
+            </div>
+
+            <button @click="clickxiaomi">点击本地json实现不了</button>
+            <div
+                class="currency"
+                v-for="(product,index) in xiaomi"
+                :key=index
+            >
+                <span>{{product.productName}}</span>:    <span>{{product.productPrice}}</span>
+            </div>
 
         </div>
     </div>
@@ -49,8 +59,9 @@ export default {
             info: null,
             loading:true,
             errored:false,
-            text: null,
-            msg:null
+            text: null,  //异步请求
+            msg:null, //django的api返回数据
+            xiaomi:null //本地的json
         }
     },
     filters: {
@@ -64,7 +75,29 @@ export default {
             return "后执行异步请求"
         },
 
-        //https://www.cnblogs.com/Eeyhan/p/10579239.html
+        async hello2 (flag) {
+            if (flag){
+                return 'right'
+            }else{
+                throw 'wrong, has a error,flag=0'
+            }
+        },
+
+
+        awaitMethod (num) {
+            return new Promise((resolve) => {
+                setTimeout (() => {
+                    resolve(2*num);
+                },2000)
+            })
+        },
+        async testWait () {
+            let result = await this.awaitMethod(30);
+            let result1 = await this.awaitMethod(50);
+            let result2 = await this.awaitMethod(30);
+            console.log(result+result1+result2);
+        },
+
         clickHandler () {
             Axios
                 .get("http://127.0.0.1:8000/data/")
@@ -75,11 +108,20 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+        },
+
+        clickxiaomi () {
+            Axios
+                .get('http://localhost:8080/static/ceshi.json') 
+                .then(res => {
+                    this.xiaomi = res.data.result
+                    console.log(res)
+                })
         }
     },
     mounted () {
         //下面是axios获取后端数据
-        Axios
+        let a  = Axios
             .get("https://api.coindesk.com/v1/bpi/currentprice.json")
             .then(response =>{
                 //console.log(response)
@@ -93,14 +135,25 @@ export default {
             })
             .finally(() => this.loading = false);
         
+        console.log(a) //axios async返回都是promise对象
         //下面是异步执行async async异步函数返回的是一个promise对象，
         //如果要获取到promise返回值，我们就应该使用.then方法。
         this.hello().then(result => { //不要忘记this.hello() ，不是hello()
             console.log(result);
         })
+
+        this.hello2(0)
+            .catch(err =>{
+                console.log(err)
+            })
+
         console.log(this.hello());
         console.log('先执行');
 
+        console.log(this.hello2(1))
+        console.log(this.hello2(0))
+
+        this.testWait()
         
     }
     
