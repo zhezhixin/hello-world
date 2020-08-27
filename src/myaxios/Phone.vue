@@ -3,6 +3,7 @@
        <div>
            <input placeholder="please input your phone number" v-model="phonenum" />
            <button @click="getFaceResult">确定</button>
+           <button @click="getFaceResult_2">确定用await</button>
        </div>
        <div>
            <span class="currency"
@@ -49,7 +50,8 @@ export default {
                         this.getFaceList(province,city)
                             .then(res => {
                                 if (res.status===200 && res.data.success){
-                                    this.facelist = res.data.obj
+                                    this.facelist = res.data.price
+                                    console.log(res.data.price)
                                 }
                             })
                     }
@@ -57,15 +59,36 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+
+        //await和.then 一样获得promise结果
+        async getFaceResult_2 () {
+            try{
+                let location = await this.getLocation(this.phonenum)
+                if (location.data.success) {
+                    let province = location.data.obj.province;
+                    let city = location.data.obj.city;
+                    let result = await this.getFaceList(province,city)
+                    if (result.data.success) {
+                        this.facelist = result.data.price
+                    }
+                }
+            }catch(err){
+                console.log(err);
+            }
         }
 
     },
     mounted () {
-      
+      this.getFaceResult()
+      this.getFaceResult_2()
     }
     
 }
 </script>
 <style>
-    
+    #phoneapi {
+        margin: 0 auto;
+        text-align: center;
+    }
 </style>

@@ -25,18 +25,10 @@
 
                 </section>
             </div>
-            <router-view></router-view>
-            <div>{{text}}</div>
-
-            <button @click="clickHandler">点击</button>
-            <div
-                class="currency"
-                v-for="(content,index) in msg"
-                :key="index"
-            >
-                <span class="lighten">{{content.id}}</span>
-                <span class="lighten">{{content.name}}</span>
+            <div>
+                <router-view></router-view>
             </div>
+            <div>{{text}}</div>
 
             <button @click="clickxiaomi">点击本地json实现不了</button>
             <div
@@ -60,7 +52,6 @@ export default {
             loading:true,
             errored:false,
             text: null,  //异步请求
-            msg:null, //django的api返回数据
             xiaomi:null //本地的json
         }
     },
@@ -92,22 +83,13 @@ export default {
             })
         },
         async testWait () {
+            //await关键字，只能放在async函数里面
+            //await它后面可以放任何表达式，不过我们更多放的是一个promise对象的表达式
+            //await和.then 一样获得promise结果
             let result = await this.awaitMethod(30);
             let result1 = await this.awaitMethod(50);
             let result2 = await this.awaitMethod(30);
             console.log(result+result1+result2);
-        },
-
-        clickHandler () {
-            Axios
-                .get("http://127.0.0.1:8000/data/")
-                .then(response => {
-                    console.log(response.data)
-                    this.msg = response.data
-                })
-                .catch(error => {
-                    console.log(error)
-                })
         },
 
         clickxiaomi () {
@@ -136,6 +118,7 @@ export default {
             .finally(() => this.loading = false);
         
         console.log(a) //axios async返回都是promise对象
+
         //下面是异步执行async async异步函数返回的是一个promise对象，
         //如果要获取到promise返回值，我们就应该使用.then方法。
         this.hello().then(result => { //不要忘记this.hello() ，不是hello()
@@ -150,10 +133,10 @@ export default {
         console.log(this.hello());
         console.log('先执行');
 
-        console.log(this.hello2(1))
-        console.log(this.hello2(0))
+        //console.log(this.hello2(1))
+        //console.log(this.hello2(0))
 
-        this.testWait()
+       this.testWait()
         
     }
     
