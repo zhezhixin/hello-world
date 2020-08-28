@@ -74,7 +74,8 @@ export default {
             }
         },
 
-
+        //函数本身返回promise , 加不加async结果都一样
+        //https://segmentfault.com/a/1190000013141641
         awaitMethod (num) {
             return new Promise((resolve) => {
                 setTimeout (() => {
