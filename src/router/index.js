@@ -51,6 +51,11 @@ export default new VueRouter({
       component: () => import('@/css/MyBlog.vue')
     },
     {
+      path: '/flex',
+      name: 'flex',
+      component: () => import('@/css/myFlex.vue')
+    },
+    {
       path: '/axios',
       name: 'axios',
       component: () => import('@/myaxios/Index.vue'),
