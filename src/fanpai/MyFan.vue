@@ -21,10 +21,11 @@
     },
     mounted(){
       this.setNumberTransform()
-      let num = 3000
+      const orinum = parseInt(this.orderNum.join(""))    
+      let num = orinum
       setInterval(() => {
         if(num == 9999){
-          num = 3000
+          num = orinum
         }else{
           num++
         }
@@ -34,12 +35,13 @@
     methods: {
         // 设置文字滚动
       setNumberTransform () {
-        const numberItems = this.$refs.numberItem // 拿到数字的ref，计算元素数量
+        const numberItems = this.$refs.numberItem // 拿到dom树的i 元素，计算4个元素数量 numberItem[0] 代表第一个i元素
         const numberArr = this.orderNum.filter(item => !isNaN(item))
         // 结合CSS 对数字字符进行滚动,显示订单数量
         for (let index = 0; index < numberItems.length; index++) {
+          //对四个数字中的i设置位置
             const elem = numberItems[index]
-            elem.style.transform = `translate(-50%, -${numberArr[index] * 10}%)`
+            elem.style.transform = `translate(-50%, -${numberArr[index] * 10}%)` //用` 多行字符串
         }
       },
       // 处理总订单数字

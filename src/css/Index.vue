@@ -83,7 +83,7 @@ body{
   border: $width solid $color;
 }
 
-.danger {
+.danger p { 
   @include boxback;
   line-height: 80px;
   font-size: 15px;

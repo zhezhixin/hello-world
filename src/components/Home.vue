@@ -14,7 +14,9 @@
     <router-link to="/cssblog"> go to myblog </router-link> |
     <router-link to="/flex"> go to myflex</router-link> |
     <br>
-    <router-link to="/axios">go to axios </router-link>
+    <router-link to="/axios">go to axios </router-link> | 
+    <br>
+    <router-link to="/elui" >go to element ui</router-link> 
     </p>
   </div>
 </template>

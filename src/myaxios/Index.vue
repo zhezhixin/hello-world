@@ -39,12 +39,22 @@
                 <span>{{product.productName}}</span>:    <span>{{product.productPrice}}</span>
             </div>
 
+            <div> 
+                <my-promise></my-promise>
+            </div>
+
         </div>
     </div>
 </template>
 <script>
 import Axios from "axios"
+import MyPromise from "@/myaxios/MyPromise.vue"
+
 export default {
+    components: {
+        MyPromise
+    },
+
     data () {
         return {
             datainfo: null,
@@ -143,7 +153,7 @@ export default {
     
 }
 </script>
-<style>
+<style> 
     .box {
         margin: 0 auto;
         width: 800px;
