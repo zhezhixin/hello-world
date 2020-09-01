@@ -141,15 +141,16 @@ header, footer {
         flex-flow: column nowrap;
     }
 
-    #main >article, 
+    #main > article, 
     #main > nav, 
-    #main >aside {
+    #main > aside {
         -webkit-order: 0;
         order:0
     }
     #main > nav, 
     #main > aside, 
-    header, footer {
+    header, 
+    footer {
         min-height: 50px;
         max-height: 50px;
    }

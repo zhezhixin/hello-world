@@ -1,7 +1,7 @@
 <template>
   <div class="storetest">
     <button @click="minus()">-</button>
-    <div>computed: {{coun}}</div>
+    <span>computed: {{coun}}</span>
     <button @click="add()">+</button>
     <div>data: {{count}}</div>
     <div>data定义的属性不会因为它的赋值变量的变化而变化</div>
