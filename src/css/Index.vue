@@ -5,6 +5,9 @@
       </div>
     </div>
 
+    <div class="usekeyframes">
+    </div>
+
     <div class="danger">
       <p>混入(mixin)通过 <span>@mixin</span> 指令来定义。 @mixin name { property: value; property: value; ... }
 以下实例创建一个名为 "important-text" 的混入：</p>
@@ -126,6 +129,24 @@ body{
   color:wheat
 }
 
+.usekeyframes {
+  width: 100px;
+  height: 100px;
+  background:rgb(123, 118, 172);
+  position: relative;
+  animation: mymove 5s infinite;
+  -moz-animation:mymove 5s infinite; /* Firefox */
+  -webkit-animation:mymove 5s infinite; /* Safari and Chrome */
+  -o-animation:mymove 5s infinite; /* Opera */
+}
+
+@keyframes mymove {
+  0% {left:0}
+  25% {left:200px}
+  75% {left: 50px}
+  100% {left: 100px}
+}
+
 
 
 .txbox {
@@ -138,11 +159,6 @@ body{
 
 
 
-
-.my-map {
-    width: 100%;
-    height: 600px;
-}
 *{box-sizing: border-box;}
 .parent{
   border:1px solid;

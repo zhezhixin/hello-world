@@ -8,14 +8,27 @@ export default new Vuex.Store({
     count: 0
   },
   mutations: {
-    inceremnet (state) {
+    increment (state) {
       state.count++
     },
-    decremnet (state){
+    decrement (state){
       state.count--
+    },
+    increment_2 (state,val){
+      state.count += val
+    },
+    decrement_2 (state,val) {
+      state.count -= val
     }
   },
   actions: {
+    increment(context,val) {
+      //context 官方给出的指定对象, 此处context可以理解为store对象
+      context.commit('increment_2',val)
+    },
+    decrement (context,val) {
+      context.commit('decrement_2',val)
+    }
   },
   modules: {
   }
