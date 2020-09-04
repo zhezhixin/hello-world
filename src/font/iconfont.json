@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "16950572",
+      "name": "长袖",
+      "font_class": "changxiu",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    }
+  ]
+}

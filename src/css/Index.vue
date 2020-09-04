@@ -7,6 +7,9 @@
 
     <div class="usekeyframes">
     </div>
+    
+    <span class="iconfont">&#xe60e;</span>
+    <i class="iconfont testicon"></i>
 
     <div class="danger">
       <p>混入(mixin)通过 <span>@mixin</span> 指令来定义。 @mixin name { property: value; property: value; ... }
@@ -147,7 +150,19 @@ body{
   100% {left: 100px}
 }
 
-
+.iconfont {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  color:rgb(50, 97, 87);
+  font-size: 8rem;
+}
+.testicon{
+  color: rgb(150, 89, 150);
+  font-size: 4rem;
+}
 
 .txbox {
   @include boxback;

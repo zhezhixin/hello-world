@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import '@/font/iconfont.css'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import {
