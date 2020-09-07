@@ -10,6 +10,22 @@
     
     <span class="iconfont">&#xe60e;</span>
     <i class="iconfont testicon"></i>
+    <i class="el-icon-sunrise"></i>
+
+    <div id="wrap" class= "clearfix" >
+      <div class="v1bar">Thisisaveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword</div>
+      <div class="inv1bar">Thisisaveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword</div>
+      <div class="cbar">Thisisaveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword</div><br>
+    
+      <div class="scrollbar" id="default-style">
+        <div class="force-overflow">
+        </div>
+      </div>
+      <div class="scrollbar" id="style1">
+        <div class="force-overflow">
+        </div>
+      </div>
+    </div>
 
     <div class="danger">
       <p>混入(mixin)通过 <span>@mixin</span> 指令来定义。 @mixin name { property: value; property: value; ... }
@@ -162,6 +178,71 @@ body{
 .testicon{
   color: rgb(150, 89, 150);
   font-size: 4rem;
+}
+
+#wrap {
+  width: 500px;
+}
+.clearfix:after,
+.clearfix:before{
+  content:'';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.v1bar,
+.inv1bar,
+.cbar {
+  display: block;
+  width:10rem;
+  overflow: auto;
+  height: 2rem;
+  background: purple;
+}
+.inv1bar::-webkit-scrollbar {
+  display: none;
+}
+/*定义滚动条高及背景 横滚动条的尺寸*/  
+.cbar::-webkit-scrollbar{ 
+  width: 3px;
+  height: 8px;
+  background-color: #aaa;
+}
+.cbar::-webkit-scrollbar-thumb{
+  background: #000;
+}
+
+.scrollbar {
+  float: left;
+  height: 300px;
+  width: 65px;
+  background-color: #d9e0af;
+  overflow-y:scroll;
+  margin-bottom: 25px;
+  border: 1px solid rgb(0, 0, 0);
+}
+.force-overflow {
+  min-height: 450px;
+}
+
+/*定义滚动条轨道 内阴影+圆角 RGBA(R,G,B,A) A：Alpha透明度,取值0~1之间,30%不透明度*/  
+#style1::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+/*定义滚动条宽及背景 宽对应竖滚动条的尺寸*/  
+#style1::-webkit-scrollbar {
+  width: 12px;
+  background-color:#f5f5f5;
+}
+/*定义滑块 内阴影+圆角*/  
+#style1::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.3);
+  background-color: rgb(94, 114, 61);
 }
 
 .txbox {

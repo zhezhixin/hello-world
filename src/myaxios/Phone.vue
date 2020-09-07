@@ -8,7 +8,7 @@
        <div>
            <span class="currency"
            v-for="(item,index) in facelist"
-           :key=index
+           :key="index"
            >
                 {{item}}
            </span>

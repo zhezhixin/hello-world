@@ -34,7 +34,7 @@
             <div
                 class="currency"
                 v-for="(product,index) in xiaomi"
-                :key=index
+                :key="index"
             >
                 <span>{{product.productName}}</span>:    <span>{{product.productPrice}}</span>
             </div>
@@ -42,17 +42,22 @@
             <div> 
                 <my-promise></my-promise>
             </div>
-
+            <div>
+                <my-websocket></my-websocket>
+            </div>
+            
         </div>
     </div>
 </template>
 <script>
 import Axios from "axios"
 import MyPromise from "@/myaxios/MyPromise.vue"
+import MyWebsocket from "@/myaxios/MyWebsocket.vue"
 
 export default {
     components: {
-        MyPromise
+        MyPromise,
+        MyWebsocket
     },
 
     data () {

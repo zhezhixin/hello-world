@@ -10,6 +10,8 @@
     <div>data定义的属性不会因为它的赋值变量的变化而变化</div>
     <div>computed定义的属性会随它的赋值变量的变化而变化</div>
     <br>
+    <div>使用mapstate 中对象的形式获取值userInfo： {{userInfo}}</div>
+    <br>
     <slot name="header"></slot>
     <slot></slot>
     <slot name="footer"></slot>
@@ -17,6 +19,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'Storetest',
   data () {
@@ -31,7 +34,8 @@ export default {
       //console.log(c)
       //方法一：保留两位小数，但是数值改变成了字符串类型,所以不能在store上计算
       return this.$store.state.count.toFixed(2) 
-    }
+    },
+    ...mapState(["userInfo"])
   },
   methods: {
     add() {

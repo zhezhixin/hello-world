@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    count: 0,
+    userInfo:{phone: 111}
   },
   mutations: {
     increment (state) {

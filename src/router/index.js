@@ -64,9 +64,10 @@ export default new VueRouter({
       path: '/axios',
       name: 'axios',
       component: () => import('@/myaxios/Index.vue'),
+      redirect: '/phone',
       children: [
         {
-          path:'/',
+          path:'/phone',
           name:'phone',
           component: () => import('@/myaxios/Phone.vue')
         }
