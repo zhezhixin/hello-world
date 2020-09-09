@@ -72,6 +72,12 @@ export default new VueRouter({
           component: () => import('@/myaxios/Phone.vue')
         }
       ]
+    },
+    {
+      path: '/room/:id',
+      name: 'room',
+      props: true,
+      component: () => import("@/myaxios/MyWebsocket.vue")
     }
   ]
 }) 

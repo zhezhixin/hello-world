@@ -42,9 +42,6 @@
             <div> 
                 <my-promise></my-promise>
             </div>
-            <div>
-                <my-websocket></my-websocket>
-            </div>
             
         </div>
     </div>
@@ -52,12 +49,10 @@
 <script>
 import Axios from "axios"
 import MyPromise from "@/myaxios/MyPromise.vue"
-import MyWebsocket from "@/myaxios/MyWebsocket.vue"
 
 export default {
     components: {
         MyPromise,
-        MyWebsocket
     },
 
     data () {

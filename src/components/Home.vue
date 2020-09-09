@@ -16,7 +16,8 @@
     <br>
     <router-link to="/axios">go to axios</router-link> 
     <br>
-    <router-link to="/elui" >go to element ui</router-link> 
+    <router-link to="/elui" >go to element ui</router-link>
+    <router-link to="/room/test" >go to romm/test</router-link> 
     </p>
   </div>
 </template>
