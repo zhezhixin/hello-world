@@ -13,6 +13,7 @@
     "echarts": "^4.8.0",
     "echarts-gl": "^1.1.1",
     "element-ui": "^2.13.2",
+    "qs": "^6.9.4",
     "v-distpicker": "^1.2.7",
     "vue": "^2.6.11",
     "vue-baidu-map": "^0.21.22",
@@ -46,7 +47,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-irregular-whitespace":"off"
+    }
   },
   "browserslist": [
     "> 1%",

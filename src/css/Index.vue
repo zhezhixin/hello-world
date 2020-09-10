@@ -7,6 +7,11 @@
 
     <div class="usekeyframes">
     </div>
+
+    <div class="inline-bl">bsdffffsssdsad
+      <span>baidubaidubaidu</span>
+      <span>googlegooglegoogle</span>
+    </div>
     
     <span class="iconfont">&#xe60e;</span>
     <i class="iconfont testicon"></i>
@@ -165,6 +170,23 @@ body{
   75% {left: 50px}
   100% {left: 100px}
 }
+
+.inline-bl {
+  width: 800px;
+  height: 100px;
+  background-color: grey;
+  span {
+    background:rgb(187, 131, 159);
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    vertical-align: bottom;
+    text-align: center;
+    line-height: 30px;
+  }
+}
+
 
 .iconfont {
   width: 1rem;
