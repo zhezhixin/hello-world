@@ -20,6 +20,10 @@
     <div class="box">
       <dong-tai></dong-tai>
     </div>
+
+    <div class="box">
+      <class-style></class-style>
+    </div>
     <div class="box" >
       <router-link class="back" to='/'>返回</router-link>
     </div>
@@ -31,13 +35,15 @@ import Storetest from '@/others/Storetest.vue'
 import Ditu from '@/others/Ditu.vue'
 import Wait from '@/others/Wait.vue'
 import DongTai from '@/others/DongTai.vue'
+import ClassStyle from '@/others/ClassStyle.vue'
 export default {
   name: 'Others',
   components: {
       Storetest,
       Ditu,
       Wait,
-      DongTai
+      DongTai,
+      ClassStyle
   }
 }
 </script>
@@ -47,14 +53,14 @@ export default {
 .box {
   margin: 30px auto;
   padding: 15px 25px;
-  background-color: rgb(138, 182, 184);
+  background-color: rgb(149, 181, 184);
   border:2px solid rgb(71, 71, 71);
   border-radius:7pt;
   width:80%;
 }
 
 .back:hover{
-  color:rgb(216, 236, 176);
+  color:rgb(125, 148, 81);
   font-weight: bold;
 }
 </style>

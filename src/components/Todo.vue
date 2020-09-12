@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <input v-model="inputvalue"/>
+    <input v-model="inputvalue" ref="usernameInput"/>
     <button @click="handlesubmit">提交</button>
     <ul >
       <Todoitem 
@@ -31,6 +31,9 @@ export default {
     }
   },
   methods: {
+    focus () {
+      this.$refs.usernameInput.focus ();
+    },
     handlesubmit () {
       this.list.push(this.inputvalue)
       this.inputvalue = ''
@@ -38,6 +41,9 @@ export default {
     removeTodo (index){
       this.list.splice(index, 1)
     }
+  },
+  mounted () {
+    this.focus();
   }
 }
 </script>
