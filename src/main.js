@@ -173,6 +173,20 @@ Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 
+router.beforeEach((to,from,next) => {
+  let l = sessionStorage.getItem('token');
+  if (to.path == '/login') {
+    next();
+    return
+  }
+  if (l) {
+    next();
+  } else {
+    next('/login');
+  }
+})
+
+
 new Vue({
   router,
   store,
