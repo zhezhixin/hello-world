@@ -83,6 +83,12 @@ export default new VueRouter({
       name: 'room',
       props: true,
       component: () => import("@/myaxios/MyWebsocket.vue")
+    },
+    {
+      path: '/yufa',
+      name: 'yufa',
+      props: true,
+      component: () => import("@/yufa/Index.vue")
     }
   ]
 }) 

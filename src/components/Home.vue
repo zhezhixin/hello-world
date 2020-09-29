@@ -18,6 +18,7 @@
     <br>
     <router-link to="/elui" >go to element ui</router-link>
     <router-link to="/room/test" >go to room/test</router-link> 
+    <router-link to="/yufa" >go to yufa</router-link>
     </p>
   </div>
 </template>

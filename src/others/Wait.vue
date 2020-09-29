@@ -4,7 +4,6 @@
     <p>Computed reversed message: "{{ reversedMessage }}"</p>
 
     <input v-model="f"/>
-    <button @click="f">submit</button>
     <div>使用watch：{{fullname}}</div>
     <div>使用computed:{{dofull}}</div>
   </div>
@@ -18,6 +17,7 @@ export default {
             f:'firstName',
             l:'lastName',
             fullname: 'firstName lastName',//在watch 里需要先定义一个数据
+
             message: 'hello'//在computed 里是reversedMessage一个计算属性
         }
     },
