@@ -22,6 +22,10 @@
     </div>
 
     <div class="box">
+      <dong-tai2></dong-tai2>
+    </div>
+
+    <div class="box">
       <class-style></class-style>
     </div>
     <div class="box" >
@@ -36,6 +40,7 @@ import Ditu from '@/others/Ditu.vue'
 import Wait from '@/others/Wait.vue'
 import DongTai from '@/others/DongTai.vue'
 import ClassStyle from '@/others/ClassStyle.vue'
+import DongTai2 from '@/others/DongTai2.vue'
 export default {
   name: 'Others',
   components: {
@@ -43,7 +48,8 @@ export default {
       Ditu,
       Wait,
       DongTai,
-      ClassStyle
+      ClassStyle,
+      DongTai2
   }
 }
 </script>
