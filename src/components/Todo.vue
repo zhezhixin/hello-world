@@ -1,23 +1,27 @@
 <template>
   <div class="about">
     <h1>任务计划列表</h1>
-    <input v-model="inputvalue" @keyup.13="handlesubmit" ref="usernameInput"/>
-    <button @click="handlesubmit">提交</button>
-    <li v-show="!list.length">还没有添加任务</li>
-    <ul class="task-count" v-show="list.length">
+    <span style="position:relative;width:400px;display: inline-block;">
+      <span class="el-icon-search" @click="visibility='search'" title="输入内容，点击小放大镜就能搜索"></span>
+      <input class="myinput " v-model="inputvalue" @keyup.13="handlesubmit" ref="usernameInput" placeholder="Add a todo" icon="el-icon-search" />
+    </span>
+    <button @click="handlesubmit">添加</button>
+    <ul class="task-count">
         <li>{{unComplete}}个任务未完成</li>
         <li class="action">
-            <a :class="{active:visibility!=='unCompleted'&&visibility!=='completed'}" @click="visibility='all'">所有任务</a>
+            <a :class="{active:visibility==='all'}" @click="visibility='all'">所有任务</a>
             <a :class="{active:visibility==='unCompleted'}"  @click="visibility='unCompleted'">未完成的任务</a>
             <a :class="{active:visibility==='completed'}" @click="visibility='completed'">完成的任务</a>
         </li>
     </ul>
-    <!--https://cn.vuejs.org/v2/api/#key 重点 key 不能写成:key="index" 基于 key 的变化重新排列元素顺序-->
+    <li v-show="!list.length">还没有添加任务</li>
+    <div v-show="visibility==='search'">搜索结果为：（共计{{this.filterData.length}}个任务）</div>
+    <!--https://cn.vuejs.org/v2/api/#key 重点 key 不能写成:key="index" , 基于 key 的变化重新排列元素顺序-->
     <ul class="task-list" v-show="list.length">
       <Todoitem 
         class="todo"
         v-for="(todo,index) in filterData"
-        :key="todo.todo"  
+        :key="todo.id"  
         :todo="todo"
         :index="index"
         @remove="removeTodo"
@@ -25,8 +29,8 @@
         @iscom="editComplete"
       />
     </ul>
-    <p>
-      <router-link to="/">返回</router-link>
+    <p class="action" v-show="visibility==='search'">
+      <a :class="{active:visibility==='all'}" @click="visibility='all'">返回</a>
     </p>
   </div>
 </template>
@@ -43,7 +47,9 @@ export default {
     return {
       inputvalue: '',
       list: [],
-      visibility: 'all'
+      visibility: 'all',
+      searchData:[],
+      id : 0
     }
   },
   methods: {
@@ -51,31 +57,68 @@ export default {
       this.$refs.usernameInput.focus ();
     },
     handlesubmit () {
+      this.id += 1;
       if (this.inputvalue === ''){
         return 
       }
       this.list.push({
+        id:this.id.toString(),
         todo:this.inputvalue,
         isComplete:false
       })
       this.inputvalue = ''
     },
-    removeTodo (index){
-      this.list.splice(index, 1)
+    removeTodo (id){
+      this.$confirm('删除该任务？','小提示',{
+        confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+      }).then(()=>{
+          this.list = this.list.filter((item) => {
+              return item.id != id
+          });
+          this.$message({
+              type: 'success',
+              message: '删除成功!'
+          });
+      }).catch(()=>{
+          this.$message({
+              type: 'info',
+              message: '已取消删除'
+          }); 
+      })
     },
-    editTodo(index,todo){
+    editTodo(id,todo){
+      this.list.map(item=>{
+        if (item.id == id){
+          item.todo = todo
+        }
+      })
+      /* 
+      this.list[index].todo = todo
       var newtodo = {
+        id:item.id,
         todo:todo,
-        isComplete:this.list[index].isComplete
+        isComplete:item.isComplete
       }
       this.list.splice(index,1,newtodo)
+      */
     },
-    editComplete(index,state){
+    editComplete(id){
+      this.list.map(item=>{
+        if (item.id == id){
+          item.isComplete = !item.isComplete
+        }
+      })
+      /**
+       * this.list[index].isComplete = !this.list[index].isComplete
       var newtodo = {
-        todo:this.list[index].todo,
+        id:item.id,
+        todo:item.todo,
         isComplete:state
       }
       this.list.splice(index,1,newtodo)
+      */
     }
   },
   computed:{
@@ -84,10 +127,12 @@ export default {
         return !item.isComplete
       }).length
     },
-    filterData(){
-     var filter = {
+    filterData:{
+      get(){
+        var that = this
+        var filter = {
           all:function(list){
-              return list;
+              return list
           },
           completed:function(list){
               return list.filter(item=>{
@@ -98,10 +143,22 @@ export default {
               return list.filter(item=>{
                   return !item.isComplete;
               })
+          },
+          search:function(list){
+              return list.filter(item=>{
+                console.log(that)
+                console.log(this)
+                console.log(that.inputvalue)
+                console.log(item,item.todo.includes(that.inputvalue))
+                  return item.todo.includes(that.inputvalue)
+              })
           }
+        }
+        return filter[this.visibility](this.list)
+      },
+      set(val){
+        console.log(val)
       }
-      return filter[this.visibility](this.list)
-      
     }
   },
   mounted () {
@@ -122,7 +179,7 @@ h1{
 .about{
   text-align: center;
 }
-input{
+.myinput{
   vertical-align:middle; /*基准线让input和button对齐*/
   box-sizing: border-box;
   margin:30px auto;
@@ -136,6 +193,13 @@ input{
   height: 40px;
   font-family: "Microsoft soft";
 }
+.el-icon-search{
+  position: absolute;
+  top:43px;
+  right: 7px;
+  cursor: pointer;
+}
+
 button,button:visited{
   vertical-align:middle;/*基准线让input和button对齐*/
   width:70px;
@@ -173,12 +237,15 @@ button:hover,button:active,button:focus{
   color: #777
 }
 .active {
-	border: 1px solid rgba(175,47,47,0.2)
+	border: 1px solid rgba(25, 77, 51, 0.575);
+  border-radius:5px;
 }
 
 .task-list{
   width:550px;
   margin:0 auto;
 }
-
+.searchshow{
+  display: block;
+}
 </style>

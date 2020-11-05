@@ -7,21 +7,21 @@
                     type="checkbox"
                     v-model="iscom"
                 />
-                {{thisvalue}}
+                {{index+1}}.{{thisvalue}}
                 <span class="handle">
                     <button class="destroy" @click="handledelete"></button>
                     <button @click="changethisvalue">编辑</button>
                 </span>
             </div> 
 
-            <input
+            <el-input
                 v-myfocus="isChecked"
                 class="edit"
                 type="text"
                 v-model="inputStr"
                 @blur="inputStred()"
                 @keyup.13="inputStred()"            
-            />
+            ></el-input>
         </li>
     </div>
 </template>
@@ -30,6 +30,7 @@ export default {
     props:['todo','index'],
     data (){
         return {
+            item:this.todo,
             thisvalue: this.todo.todo,
             iscom:this.todo.isComplete,
             isChecked: false,
@@ -38,7 +39,7 @@ export default {
     },
     methods: {
         handledelete (){
-            this.$emit('remove',this.index)
+            this.$emit('remove',this.item.id)
         },
         changethisvalue(){
             this.isChecked = true;
@@ -47,12 +48,12 @@ export default {
 		inputStred(){
 			this.thisvalue=this.inputStr;
             this.isChecked=false;
-            this.$emit('edititem',this.index,this.inputStr)
+            this.$emit('edititem',this.item.id,this.inputStr)
 		}
     },
     watch:{
-        iscom (value){
-            this.$emit('iscom',this.index,value)
+        iscom (){
+            this.$emit('iscom',this.item.id)
         }
     },
     directives:{
@@ -89,12 +90,18 @@ export default {
 }
 .destroy {
 	display: none;
+    outline: 0;
+    border:0;
+    background:0;
+    font-size: 18px;
+    color: #af5b5e;
+    margin-right: 10px;
 }
 li:hover .destroy{
     display: inline-block;
 }
 .destroy:hover {
-	color: #af5b5e
+	color: #aa383c
 }
 .destroy:after {
 	content: 'X'
@@ -104,11 +111,12 @@ li{
     position: relative;
     text-align: left;
     border-bottom: 1px solid #ededed;
-    padding:0 0 10px 0;
+    padding:10px 0 0 0;
 }
 .handle {
     position: absolute;
-    right:0
+    right:0;
+    top:3px;
 }
 
 </style>
