@@ -3,7 +3,7 @@
     <h1>任务计划列表</h1>
     <span style="position:relative;width:400px;display: inline-block;">
       <span class="el-icon-search" @click="visibility='search'" title="输入内容，点击小放大镜就能搜索"></span>
-      <input class="myinput " v-model="inputvalue" @keyup.13="handlesubmit" ref="usernameInput" placeholder="Add a todo" icon="el-icon-search" />
+      <input class="myinput " v-model="inputvalue" @keyup.13="handlesubmit" ref="usernameInput" placeholder="Add a todo" />
     </span>
     <button @click="handlesubmit">添加</button>
     <ul class="task-count">
@@ -15,7 +15,10 @@
         </li>
     </ul>
     <li v-show="!list.length">还没有添加任务</li>
-    <div v-show="visibility==='search'">搜索结果为：（共计{{this.filterData.length}}个任务）</div>
+    <div v-show="visibility==='search'">
+      搜索结果为：（共计{{this.filterData.length}}个任务）
+      <a style="cursor: pointer;color: #777;" @click="visibility='all'">返回</a>
+    </div>
     <!--https://cn.vuejs.org/v2/api/#key 重点 key 不能写成:key="index" , 基于 key 的变化重新排列元素顺序-->
     <ul class="task-list" v-show="list.length">
       <Todoitem 
@@ -29,9 +32,6 @@
         @iscom="editComplete"
       />
     </ul>
-    <p class="action" v-show="visibility==='search'">
-      <a :class="{active:visibility==='all'}" @click="visibility='all'">返回</a>
-    </p>
   </div>
 </template>
 
@@ -67,6 +67,7 @@ export default {
         isComplete:false
       })
       this.inputvalue = ''
+      this.visibility='all'
     },
     removeTodo (id){
       this.$confirm('删除该任务？','小提示',{

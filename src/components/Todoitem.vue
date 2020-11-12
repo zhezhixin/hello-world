@@ -14,14 +14,15 @@
                 </span>
             </div> 
 
-            <el-input
+            <input
                 v-myfocus="isChecked"
                 class="edit"
                 type="text"
                 v-model="inputStr"
                 @blur="inputStred()"
-                @keyup.13="inputStred()"            
-            ></el-input>
+                @keyup.13="inputStred()"  
+                style="width:300px;"          
+            />
         </li>
     </div>
 </template>
@@ -94,7 +95,7 @@ export default {
     border:0;
     background:0;
     font-size: 18px;
-    color: #af5b5e;
+    color: #926c6e;
     margin-right: 10px;
 }
 li:hover .destroy{

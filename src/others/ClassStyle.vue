@@ -5,6 +5,7 @@
       <button :class="classObject" @click="changeclass">使用对象计算属性按键</button> |
       <button :class="[isActive ?activeClass:'', otherClass]" @click="changeclass">使用数组按键</button>
       <div :style="{color:activeColor,fontSize:fontSize+'px'}">样式</div>
+      <div style="color:rgb(244, 200, 146),fontSize:30px">样式</div>
       <div :style="styleObject">对象</div>
       <div :style="[styleObject,divStyle]">多个对象</div>
   </div>
