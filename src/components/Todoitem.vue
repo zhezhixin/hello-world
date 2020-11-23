@@ -1,13 +1,13 @@
 <template>
-    <div class="test" :class="{editing:isChecked}">
+    <div class="test" :class="{editing:isEditing}">
         <li>
-            <div class="view" :class="{state:iscom}">
+            <div class="view" :class="{state:todo.isComplete}">
                 <input 
                     class="state"
                     type="checkbox"
-                    v-model="iscom"
+                    v-model="todo.isComplete" 
                 />
-                {{index+1}}.{{thisvalue}}
+                {{index+1}}.{{todo.todo}}
                 <span class="handle">
                     <button class="destroy" @click="handledelete"></button>
                     <button @click="changethisvalue">编辑</button>
@@ -15,7 +15,7 @@
             </div> 
 
             <input
-                v-myfocus="isChecked"
+                v-myfocus="isEditing"
                 class="edit"
                 type="text"
                 v-model="inputStr"
@@ -31,32 +31,34 @@ export default {
     props:['todo','index'],
     data (){
         return {
-            item:this.todo,
-            thisvalue: this.todo.todo,
-            iscom:this.todo.isComplete,
-            isChecked: false,
+            //item:this.todo,
+            //thisvalue: this.todo.todo,
+            //iscom:this.todo.isComplete,
+            isEditing: false,
             inputStr:''
         }
     },
     methods: {
         handledelete (){
-            this.$emit('remove',this.item.id)
+            this.$emit('remove',this.todo.id)
         },
         changethisvalue(){
-            this.isChecked = true;
-            this.inputStr = this.thisvalue;
+            this.isEditing = true;
+            this.inputStr = this.todo.todo;
         },
 		inputStred(){
-			this.thisvalue=this.inputStr;
-            this.isChecked=false;
-            this.$emit('edititem',this.item.id,this.inputStr)
+			this.todo.todo=this.inputStr;
+            this.isEditing=false;
+            this.$emit('edititem',this.todo.id,this.inputStr)
 		}
     },
-    watch:{
-        iscom (){
-            this.$emit('iscom',this.item.id)
-        }
-    },
+    //父组件传递一个对象，子组件接受，子组件中，直接修改接受到的对象里面的值，可以修改，父子组件的值都会随之改变
+    //在这里todo.isComplete就是如此，最好还是不要用这种。https://www.cnblogs.com/pangchunlei/p/11139356.html
+    // watch:{
+    //     iscom (){
+    //         this.$emit('iscom',this.item.id)
+    //     }
+    // },
     directives:{
         myfocus:{
             update(el,binding){

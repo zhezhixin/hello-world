@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    
+    <h1>{{ time }}</h1>
     <p>
       <router-link to="/">返回</router-link>
     </p>
@@ -13,7 +13,23 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      time: new Date().toLocaleTimeString()
+    }
+  },
+  methods: {
+    tick(){
+      this.timer = setInterval(() => {
+        this.time = new Date().toLocaleTimeString()
+      }, 1000);
+    }
+  },
+  mounted () {
+    this.tick()
+  },
+  beforeDestroy () {
+    if (this.timer){
+      clearInterval(this.timer)
     }
   }
 }

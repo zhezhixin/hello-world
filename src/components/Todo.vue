@@ -46,7 +46,11 @@ export default {
   data () {
     return {
       inputvalue: '',
-      list: [],
+      list: [{
+        id: 0,
+        todo:'初始化的一个待办事项',
+        isComplete:false
+      }],
       visibility: 'all',
       searchData:[],
       id : 0
@@ -105,22 +109,22 @@ export default {
       this.list.splice(index,1,newtodo)
       */
     },
-    editComplete(id){
-      this.list.map(item=>{
-        if (item.id == id){
-          item.isComplete = !item.isComplete
-        }
-      })
-      /**
-       * this.list[index].isComplete = !this.list[index].isComplete
-      var newtodo = {
-        id:item.id,
-        todo:item.todo,
-        isComplete:state
-      }
-      this.list.splice(index,1,newtodo)
-      */
-    }
+    // editComplete(id){
+    //   this.list.map(item=>{
+    //     if (item.id == id){
+    //       item.isComplete = !item.isComplete
+    //     }
+    //   })
+    //   /**
+    //    * this.list[index].isComplete = !this.list[index].isComplete
+    //   var newtodo = {
+    //     id:item.id,
+    //     todo:item.todo,
+    //     isComplete:state
+    //   }
+    //   this.list.splice(index,1,newtodo)
+    //   */
+    // }
   },
   computed:{
     unComplete(){
@@ -147,10 +151,10 @@ export default {
           },
           search:function(list){
               return list.filter(item=>{
-                console.log(that)
-                console.log(this)
-                console.log(that.inputvalue)
-                console.log(item,item.todo.includes(that.inputvalue))
+                // console.log(that)
+                // console.log(this)
+                // console.log(that.inputvalue)
+                // console.log(item,item.todo.includes(that.inputvalue))
                   return item.todo.includes(that.inputvalue)
               })
           }
