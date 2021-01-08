@@ -17,6 +17,7 @@
 </template>
 <script>
 import Axios from "axios"
+import qs from "qs"
 export default {
     data () {
         return {
@@ -25,32 +26,43 @@ export default {
         }
     },
     methods:{
+        // qs.stringify()	转换成查询字符串
+        // let comments = {content: this.inputValue}
+        // let comValue = qs.stringify(comments)
+
+        // qs.parse() 转换成json对象
+        // let comValue = qs.parse(comments)
+
         getLocation (phonenum) {
+            var data = {a:phonenum}
             return Axios
-                        .post('http://127.0.0.1:8000/phoneLocation',{
-                            phonenum
-                        })
+                        .post('http://127.0.0.1:8000/phoneLocation',
+                            qs.stringify(data)
+                        )
         },
 
         getFaceList (province, city) {
             return Axios
-                        .post('http://127.0.0.1:8000/faceList', {
+                        .post('http://127.0.0.1:8000/faceList', qs.stringify({
                             province,
                             city
-                        })
+                        }))
         },
-
+        
         getFaceResult () {
             this.getLocation(this.phonenum)
                 .then(res => {
                     if(res.status === 200 && res.data.success){
                         let province = res.data.obj.province;
                         let city = res.data.obj.city;
-
+                        console.log('phone type:',typeof(res.data))
+                        console.log(res)
                         this.getFaceList(province,city)
                             .then(res => {
                                 if (res.status===200 && res.data.success){
                                     this.facelist = res.data.price
+                                    console.log('face type:',typeof(res.data))
+                                    console.log(res)
                                     console.log(res.data.price)
                                 }
                             })
@@ -62,6 +74,17 @@ export default {
         },
 
         //await和.then 一样获得promise结果
+
+        // // Want to use async/await? Add the `async` keyword to your outer function/method.
+
+        // async function getUser() {
+        //   try {
+        //     const response = await axios.get('/user?ID=12345');
+        //     console.log(response);
+        //   } catch (error) {
+        //     console.error(error);
+        //   }
+        // }
         async getFaceResult_2 () {
             try{
                 let location = await this.getLocation(this.phonenum)
@@ -80,8 +103,8 @@ export default {
 
     },
     mounted () {
-      this.getFaceResult()
-      this.getFaceResult_2()
+    //   this.getFaceResult()
+    //   this.getFaceResult_2()
     }
     
 }

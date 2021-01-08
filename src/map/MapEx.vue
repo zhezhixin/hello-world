@@ -1,6 +1,6 @@
 <template>
     <baidu-map class="bm-view" 
-        ak="your code"
+        ak="YoRcx2f2sno7jF8TF8e6iocyisUbGj6e"
         :center="center"
         :zoom="zoom"
         @ready="handler"

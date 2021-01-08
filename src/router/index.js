@@ -61,6 +61,11 @@ export default new VueRouter({
       component: () => import('@/css/myFlex.vue')
     },
     {
+      path: '/tengxun',
+      name: 'tengxun',
+      component: () => import('@/css/TengXun.vue')
+    },
+    {
       path: '/elui',
       name: 'elementui',
       component: () => import('@/css/Elui.vue')

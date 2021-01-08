@@ -1,0 +1,115 @@
+https://blog.csdn.net/yiyueqinghui/article/details/97626649
+HTTP请求POST、GET请求的数据格式(Content-type 和 Response-type)
+
+post方法：请求头多了Content-Type 和 Content-Length
+
+页面初始化方法：
+https://www.cnblogs.com/ooo0/p/6123465.html
+
+https://www.cnblogs.com/yanyanstyle/p/11382743.html
+GET提交和POST提交的区别？
+        1,
+        get提交，提交的信息都显示在地址栏中。
+        post提交，提交的信息不显示地址栏中。
+        
+        2，
+        get提交，对于敏感的数据信息不安全。
+        post提交，对于敏感信息安全。
+        
+        3，
+        get提交，对于大数据不行，因为地址栏存储体积有限。
+        post提交，可以提交大体积数据。 
+        
+        4，
+        get提交，将信息封装到了请求消息的请求行中。
+        post提交，将信息封装到了请求体中。
+        
+        在服务端的一个区别。
+        如果出现将中文提交到tomcat服务器，服务器默认会用iso8859-1进行解码会出现乱码，
+        通过iso8859-1进行编码，在用指定的中文码表解码。即可。
+        这种方式对get提交和post提交都有效。 
+        
+        但是对于post提交方式提交的中文，还有另一种解决办法，就是直接使用服务端一个对象
+        request对象的setCharacterEncoding方法直接设置指定的中文码表就可以将中文数据解析出来。
+        这个方法只对请求体中的数据进行解码。 
+        
+        
+        综上所述：表单提交，建议使用post。
+        
+        
+        
+        和服务端交互的三种方式：
+        1，地址栏输入url地址。get
+        2，超链接。 get
+        3，表单。 get 和  post
+
+http://127.0.0.1:8000/phoneLocation?a=1
+
+https://www.cnblogs.com/fulu/p/13879080.html
+Sec-Fetch-*请求头
+
+普通get请求和ajax 请求就是一个同步一个异步问题
+axios 和ajax jq 处理回调函数的数据区别
+自己理解【axios 所有返回数据都自动转为json，jQuery ajax所有返回数据不变， 原生ajax所有返回数据都自动转为string】
+phoneLocation => json
+faceList => string
+
+https://www.cnblogs.com/liuqifeng/p/13214946.html
+【表单是否同步问题】
+同步提交，浏览器会将响应结果直接进行覆盖，之前的表单便会被覆盖，替换成服务端返回内容
+
+
+https://blog.csdn.net/weixin_39327883/article/details/87927100?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
+【axios与ajax请求的区别】
+一、axios
+axios 是一个基于Promise 用于浏览器和 nodejs 的 HTTP 客户端
+axios({
+    method: 'post',
+    url: url,
+    data: {
+        firstName: 'Fred',
+        lastName: 'Flintstone'
+    }
+})
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});
+
+1、用于浏览器和node环境下的http请求，基于promise异步
+
+2、【可以自动将数据转换为json格式】  ***
+
+3、支持防止CSRF( 跨站请求伪造)
+
+二、ajax
+AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）
+$.ajax({
+   type: 'POST',
+   url: url,
+   data: data,
+   dataType: dataType,
+   success: function () {},
+   error: function () {}
+});
+
+function load() {
+            var xml = new XMLHttpRequest();
+            xml.open('GET', 'http://jsonplaceholder.typicode.com/posts', true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState == 4) {
+                    if (xml.status == 200) {
+                        console.log(xml.response);
+                        var obj = JSON.parse(xml.responseText);
+                        txt.innerHTML = 'first person:' + '<br/>' + 'id: ' + obj[0].id + '<br/>' + 'title: ' + obj[0].title;
+                    }
+                } else {
+                    return;
+                }
+            }
+            xml.send();
+        }
+
+mvvm问题

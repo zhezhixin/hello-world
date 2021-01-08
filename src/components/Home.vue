@@ -13,6 +13,7 @@
     <router-link to="/css"> go to css</router-link> 
     <router-link to="/cssblog"> go to myblog</router-link> 
     <router-link to="/flex"> go to myflex</router-link> 
+    <router-link to="/tengxun" >go to tengxun</router-link>
     <br>
     <router-link to="/axios">go to axios</router-link> 
     <br>

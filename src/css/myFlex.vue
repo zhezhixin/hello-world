@@ -19,6 +19,9 @@
        </div>
         <footer>footer</footer>
     </div>
+    <div>
+        <img src="../../static/img/test2.png" />
+    </div>
 
   </div>
 </template>
@@ -26,9 +29,6 @@
 <script>
 //https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
 export default {
-  name: 'myFlex',
-  data () {
-  }
 }
 </script>
 
@@ -64,7 +64,7 @@ export default {
     flex: 1 1 auto;
 }
 .flex > div:nth-child(3) {
-    background: #CE2B37;
+    background: #633e52;
     flex: 2 1 auto;
 }
 

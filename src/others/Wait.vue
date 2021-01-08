@@ -24,6 +24,16 @@ export default {
     watch: {
         //当一条数据影响多条数据的时候就需要用watch； 当f 或 l 属性发生改变 f或l函数就会运行
         //在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。
+        // 'f': function() {
+        //   this.fullname = val + ' ' + this.l
+        // }
+        // f: {
+        //   handler() {
+        //     this.fullname = val + ' ' + this.l
+        //   },
+        //   deep:true
+        // }
+        
         f (val) {
             this.fullname = val + ' ' + this.l
         },

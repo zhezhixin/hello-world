@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        //那怎么才算跨域呢？
+
+        // 请求协议http,https的不同
+        // 域domain的不同
+        // 端口port的不同
+
+        // 使用 AJAX 的 HTTP GET 请求从服务器加载数据,参数{a:1} 可以不写,服务端返回json
+        $(document).ready(function(){
+            $('#bt1').click(function(){
+                $.get('http://127.0.0.1:8000/phoneLocation',{a:1},function(myres,mystatus){
+                    alert('myres: '+ JSON.stringify(myres) + '\nmystatus: '+ mystatus);
+                    console.log(myres) // {"success": true, "obj": {"province": "浙江", "city": "宁波"}}
+                    console.log(typeof(myres)) //服务端返回json，json 为 object对象
+                })
+            })
+        });
+        // 使用 AJAX 的 HTTP GET 请求从服务器加载数据,服务端返回string
+        $(document).ready(function(){
+            $('#bt2').click(function(){
+                $.get('http://127.0.0.1:8000/faceList',{a:1},function(res){
+                    alert('res: '+res+'\nres type:'+typeof(res));
+                    console.log(res) 
+                    console.log(typeof(res))// 返回string
+                })
+            })
+        })
+         // 使用 AJAX 的 HTTP POST 请求从服务器加载数据,服务端返回json
+         $(document).ready(function(){
+            $('#bt3').click(function(){
+                $.post('http://127.0.0.1:8000/phoneLocation',{a:1,b:2},function(myres,mystatus){
+                    alert('myres: '+ myres + '\nmystatus: '+ mystatus);
+                    console.log(myres) // {"success": true, "obj": {"province": "广东", "city": "深圳"}}
+                    console.log(myres.obj) // {"province": "广东", "city": "深圳"}
+                    console.log(typeof(myres)) //object
+                })
+            })
+        })
+        // 使用 AJAX 的 请求从服务器加载数据, type默认是GET 请求
+        $(document).ready(function(){
+            $("#bt4").click(function(){
+                $.ajax({
+                    url:"http://127.0.0.1:8000/phoneLocation",
+                    type:'POST',
+                    data:{a:1,b:2},
+                    success:function(xhr,mystatus){
+                        var x = JSON.stringify(xhr) // json对象类型转为string类型
+                        $('#div1').text(x); 
+                        console.log(xhr) // {"success": true, "obj": {"province": "浙江", "city": "宁波"}}
+                        console.log(mystatus) //success
+                    },
+                    error:function(error){
+                        console.log(error)
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function(){
+            $('#bt5').click(function(){
+                $.get('https://api.coindesk.com/v1/bpi/currentprice.json',function(myres){
+                    alert('myres: '+  JSON.stringify( myres ));
+                    console.log(myres) 
+                    console.log('type:',typeof(myres)) 
+                    console.log(eval(xhr))
+                })
+            })
+        })
+    </script>
+    <script>
+        //  不加下面这两中之一会报错：Cannot set property 'innerHTML' of null，因为页面元素可能还没有加载好
+        // $(document).ready(function(){
+        //     // 执行代码
+        // });
+        // 或者
+        // $(function(){
+        //     // 执行代码
+        // });
+
+        var text = '{ "sites" : [' +
+            '{ "name":"Runoob" , "url":"www.runoob.com" },' +
+            '{ "name":"Google" , "url":"www.google.com" },' +
+            '{ "name":"Taobao" , "url":"www.taobao.com" } ]}';
+        obj = JSON.parse(text)
+        console.log(obj)
+        $(function(){    
+            $("#json1").text(obj.sites[1].name) // [object Object]
+        });
+    </script>
+    <script>
+        // AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）
+        function getphone(){
+            var xml = new XMLHttpRequest();
+            
+            xml.onreadystatechange = function() { // onreadystatechange事件触发并且符合一定条件时,才能开始处理数据
+                if(xml.readyState == 4 && xml.status == 200){
+                    console.log(xml.readyState,xml.status)
+                    console.log(xml.responseText); 
+                    console.log(typeof(xml.responseText)); // string
+                    document.getElementById('div2').innerHTML = xml.response
+                }else {
+                    return;
+                }
+            }
+            // xml.open('get', 'http://127.0.0.1:8000/phoneLocation?a=yuansheng&b=99', true); // true（异步）或 false（同步）
+            // xml.send() // 将请求发送到服务器
+
+            //post 请求发送数据.使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定您希望发送的数据
+            xml.open("POST","http://127.0.0.1:8000/phoneLocation",true);
+            xml.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xml.send("a=yuansheng&b=99");
+        }
+
+
+
+
+
+        // https://www.jianshu.com/p/fe5f173276bd 掌握Promise的使用
+       
+        function want1() {
+            console.log('want1的代码');
+        }
+        function fn1(want) {
+            // // 将想要执行的代码放入队列中，根据事件循环的机制，我们就不用非得将它放到最后面了，由你自由选择
+            want && setTimeout(want, 0);
+            console.log('这里是一系列复杂代码');
+        }
+        fn1(want1) // want1的代码
+
+         // Promise对象有三种状态，他们分别是：
+
+        // pending: 等待中，或者进行中，表示还没有得到结果
+        // resolved(Fulfilled): 已经完成，表示得到了我们想要的结果，可以继续往下执行
+        // rejected: 也表示得到结果，但是由于结果并非我们所愿，因此拒绝执行
+
+        // new Promise ((resolve,reject) => {
+        //     if(true) {resolve()};
+        //     if(false) {reject()};
+        // })
+        // 一、在Promise对象的构造函数中，将一个函数作为第一个参数。而这个函数，就是用来处理Promise的状态变化。
+        // resolve和reject都为一个函数，他们的作用分别是将状态修改为resolved和rejected
+
+        function want() {
+            console.log('want的代码');
+        }
+        function fn(want) {
+            console.log('这里是一系列复杂耗时的代码');
+            // 如果浏览器已经支持了原生的Promise对象,
+            // js引擎里已经有了Promise队列，这样就可以利用Promise将任务放在它的队列中去。
+            return new Promise( function(resolve, reject) {
+                if(typeof want == 'function') {
+                    resolve(want)
+                } else {
+                    reject(want + '不是一个函数。')
+                }
+            })
+        }
+        function wa() {
+            console.log('want...');
+        }
+
+        // 二、Promise对象中的then方法，可以接收构造函数中处理的状态变化，并分别对应执行。
+        // then方法有2个参数，第一个函数接收resolved状态的执行，第二个参数接收reject状态的执行。
+
+        fn(wa).then(want => want()) // want...
+        fn(124345).then(want => want()) // Uncaught (in promise) 124345不是一个函数。
+        fn(124345).then(want => want(),want => {console.log(want + '有一个错误')}) //t124345不是一个函数。有一个错误
+        fn(want).then(want => want()) // want的代码
+        fn(wa).then(res => want()) // want的代码
+        
+        function fn2(num) {
+            return new Promise(function(resolve, reject) {
+                if (typeof num == 'number') {
+                    resolve();
+                } else {
+                    reject();
+                }
+            }).then(function() {
+                console.log('参数是一个number值');
+            }, function() {
+                console.log('参数不是一个number值');
+            })
+        }
+
+        fn2('hahha'); // 参数不是一个number值
+        fn2(1234); // 参数是一个number值
+
+        // then方法的执行结果也会返回一个Promise对象。因此我们可以进行then的链式执行，这也是解决回调地狱的主要方式。
+        // 三、Promise中的数据传递
+        var f3 = function(num) {
+            return new Promise((resolve, reject) => {
+                if (num < 100){
+                    resolve(num);
+                } else {
+                    reject('Error')
+                }
+            })
+        }
+        f3(50).then(res => {
+            console.log('1.' + res);
+            return res + 1;
+        })
+        .then(res => {
+            console.log('2.' + res);
+            return res + 1;
+        })
+        .then(res => {
+            console.log('3.' + res);
+            return res + 1;
+        });
+
+        // OK，了解了这些基础知识之后，我们再回过头，利用Promise的知识，
+        // 对最开始的ajax的例子进行一个简单的封装。看看会是什么样子。
+        function getphone2(){
+            return new Promise((resolve,reject) => {
+                var x = new XMLHttpRequest();
+                
+                x.onreadystatechange = function() { // onreadystatechange事件触发并且符合一定条件时,才能开始处理数据
+                    if(x.readyState == 4 ) {
+                        if(x.status == 200) {
+                            try{
+                                // console.log(x.readyState,x.status)
+                                var res = JSON.parse(x.responseText)
+                                console.log(res,typeof(res)); 
+                                resolve(res);
+                            } catch (e) {
+                                reject(e)
+                            }
+                        } else {
+                            reject('error...'+ x.statusText);
+                        }
+                    }
+                }
+                x.open("POST","http://127.0.0.1:8000/phoneLocation",true);
+                x.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                x.send("a=yuansheng&b=99");
+            })
+        }
+        function getp() {
+            getphone2().then(res => {
+                console.log('success....')
+                document.getElementById('div2').innerHTML = JSON.stringify(res);
+            })
+        }
+        function getpall() {
+            Promise.all([getphone2(),getphone2()]).then(res => {
+                console.log('success....')
+                document.getElementById('div2').innerHTML = JSON.stringify(res);
+            })
+        }
+
+    </script>
+</head>
+<body>
+    <button id="bt1">get请求phonelocation并返回object结果</button><br><br>
+    <button id="bt2">get请求facelist并返回string结果</button><br><br>
+    <button id="bt3">post请求phonelocation并返回object结果</button><br><br>
+    <div id="div1"><h2>使用 jQuery AJAX 修改文本内容</h2></div>
+    <button id="bt4">ajax请求phonelocation并返回object结果</button> <br><br>
+
+    <form method="POST" action="http://127.0.0.1:8000/phoneLocation" >
+        a: <input type="text" name='a'><br>
+        <input type="submit" value="submit">
+    </form>
+    <br><br>
+    <button id="bt5">post请求并返回结果</button><br><br>
+    JSON 字符串转为object对象
+    <p id="json1"></p>
+    <div id="div2"><h2>使用 原生js AJAX 修改文本内容</h2></div>
+    <button onclick="getphone()">原生请求phonelocation并返回string结果,返回的json会自动转化为string</button><br><br>
+    <button onclick="getp()">原生请求phonelocation并返回string结果（use new promise）</button><br><br>
+    <button onclick="getpall()">原生请求phonelocation并返回string结果（use Promise.all）</button><br><br>
+</body>
+
+</html>

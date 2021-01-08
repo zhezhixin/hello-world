@@ -1,0 +1,38 @@
+// {
+  
+//   "compilerOptins": {
+//     // 严格模式, 强烈建议开启
+//     "strict": true,
+//     // 目标JS的版本
+//     "target": "es6",
+//     /*当目标是ES5或ES3的时候提供对for-of、扩展运算符和解构赋值中对于迭代器的完整支持*/
+//     "downlevelIteration": true,
+//     "lib": [
+//       // "dom",
+//       // "es5",
+//       // "es2015.collection",
+//       // "es2015.iterable"
+//       // "dom",
+//       // "es5",
+//       // "es6",
+//       // "es7",
+//       // "dom.iterable",
+//       // 编译过程中需要引入的库文件的列表
+//       "esnext",
+//     ],
+   
+   
+//     // 是否允许编译JS文件
+//     "allowJs": false,
+//     // 移除注释
+//     "removeComments": true,
+//     // 以严格模式解析 strict 默认开启 alwaysStrict
+//     // "alwaysStrict": true,
+//     // 不报告执行不到的代码错误
+//     "allowUnreachableCode": true,
+//     // 保留 const和 enum声明
+//     "preserveConstEnums": false,
+//   },
+//   "exclude": ["node_modules"]
+  
+// }
