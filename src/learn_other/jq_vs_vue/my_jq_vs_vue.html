@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script> -->
+    <style>
+        body, h1, h2, h3, h4, h5, h6, blockquote, p, pre, dl, dd, ol, ul, li, a, span, caption, th, td, form, fieldset, legend, input, button, textarea, address { margin: 0; padding: 0; }
+        body { font-size: 12px; font-family: arial,"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei","微軟正黑體","儷黑 Pro", sans-serif; }
+        fieldset, img { border: 0; }
+        h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+
+        ol, ul { list-style: none; }
+        li { list-style: none; }
+
+        a, a:hover { text-decoration: none; }  /* 去掉a标签修饰（下划线，颜色等） */
+        a, label, :focus { outline: 0 none; }
+        a, img, input { border: 0 none; }
+
+        input, button, textarea, select {font-size: 100%;} /* 对齐大小 */
+        input, button, select, textarea {outline: none;}
+
+
+        /* 以上是重置固有属性 */
+
+        body{ background: #f9f9f9; color: #666; }
+
+        .radius-btn.active{ background-color:#ddd; }
+        .radius-btn {padding: 5px; margin: 5px;border-radius: 5px;cursor: pointer;}
+        
+        .demo-panel {margin-bottom: 20px;}
+        .demo-panel h1 {font-size:18px;margin:10px;}
+
+        .layout{margin:0 auto;width:960px;}
+        .n-frame{padding: 34px 34px 0;border:1px solid #e6e6e6;background: #fff;border-radius: 10px;}
+
+        .title-item{padding-bottom: 10px;border-bottom: 1px solid #e6e6e6;margin-bottom: 20px;clear: both;}
+        .dis_bot35{ padding-bottom: 35px; }
+        .t_c { text-align: center; }
+        .title-big {font-size: 16px;color: #333;line-height: 1.5; font-weight: bold;}
+
+        .regbox{ width: 332px; padding: 30px 0; line-height: 20px; }
+        .mauto, .regbox{ margin:0 auto; }
+
+
+        .btn332{ width: 330px; height: 42px; margin: 0 auto; line-height: 42px; text-align: center; font-size: 14px; display: block; cursor: pointer; border: 1px solid #e8e8e8; -o-border-radius: 4px; border-radius: 4px; }
+        .btn_reg_1{ background-color: #ff6f3d; margin-top: 15px; border: 1px solid rgba(186,186,186,0.3); color: #fff; }
+        .btn_reg_1:hover{ background: #ff936a; }
+        .btn_reg_2{ background: #fff; margin-top: 10px; border: 1px solid #ddd;color: #7c7c7c; }
+        .btn_reg_2:hover{ color: #333; }
+
+        .marauto{ margin:0 auto;}
+        .cursor_d{ cursor: default; }
+        .na-img-area{width: 80px;height: 80px;border: 2px solid #e3e3e3; border-radius: 50%;}
+        .na-img-bg-area{width: 100%;height: 100%; border-radius: 50%;}
+        .n_succ .fixed_bot{ margin: 45px auto 30px; }
+
+        /*注册流程1： 1.1版本 */
+        
+        .process-regs{ margin:10px 10px auto; width:80%; padding:10px; color:#fff; text-align:center; line-height: 100px; }
+        .process-reg{ float:left; width:150px; height:100px; margin:10px 10px; background-color:#ccc; }
+        .process-reg.active{ background-color:#FF6F3D; }
+        .btn-radius{ display:none; border-radius: 5px; cursor:pointer; padding:5px; margin: 5px; background-color: #eee; }
+        .btn-radius.active{ display: block; }
+        .btn-radius:hover{ background-color:#ddd; }
+        .fix{ *zoom:1; }
+        .fix:after,.fix:before{ display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden; }
+        /*购物列表2*/
+        .buy-list{ font-size:14px; margin:10px 20px; width:450px; height:400px; border:1px solid #ccc; }
+        .buy-list fieldset{ font-size:16px; border-bottom:1px solid #ccc; }
+        .buy-list legend{ padding:10px; }
+
+        .buy-list ul{ margin-bottom:40px; padding:20px; }
+        .buy-list li{ margin:15px 0px; height:30px; }
+        .buy-list .buy-list-f{ float:right; margin:0px 20px; }
+
+        .buy-list-f .good-total{ float:left; margin:20px; color:red; }
+        .buy-list .good-label{ margin:0px 20px; }
+        .buy-list .good-set{ float:right; }
+
+        .good-set .set-min,
+        .good-set .set-count,
+        .good-set .set-add{ padding:5px; float:left; }
+        .good-set .set-min{ border:1px solid #ccc; border-right:0px; }
+        .good-set .set-count{ border:1px solid #ccc; width:5em; text-align:center; }
+        .good-set .set-add{ border:1px solid #ccc; border-left:0px; }
+
+        .buy-list .confirm-list-f{ margin:0px 20px; }
+        .confirm-list-f .btn-l{ float:left; }
+        .confirm-list-f .btn-r{ float:right; }
+
+        .buy-list .con-l-label{ margin-right: 40px; }
+        .buy-list .con-l-count{ font-size:16px; font-weight: bold; }
+        .buy-list .con-l-total{ text-align:right; padding:10px 20px; }
+        .buy-list-tip{ text-align:center; }
+        .buy-list-tip .tip-img{ margin:20px 0px; }
+
+        .buy-list .confirm-list-f{ margin:0px 20px; }
+        .confirm-list-f .btn-l{ float:left; }
+        .confirm-list-f .btn-r{ float:right; }
+        .buy-list .con-l-label{ margin-right: 40px; }
+        .buy-list .con-l-count{ font-size:16px; font-weight: bold; }
+        .buy-list .con-l-total{ text-align:right; padding:10px 20px; }
+        .buy-list-tip{ text-align:center; }
+        .buy-list-tip .tip-img{ margin:20px 0px; }
+
+        /* 3.表单 */
+            /* 表单基本 */
+        .bs-example{ display:inline-block; width:480px; position: relative;padding: 25px 15px 15px;margin: 15px;border-color: #e5e5e5 #eee #eee;border-style: solid;border-width: 1px; border-radius: 4px 4px 0 0; }
+        .bs-example-wrap{ display: inline-block; }
+        .bs-example-wrap-v{ display: block; width:1115px; text-align:justify; }
+
+        .form-demo{ box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;}
+        .form-group{ margin-bottom: 15px; }
+        .form-demo label{ display: inline-block; max-width: 100%; margin-bottom: 5px; font-weight: 700; }
+        .form-control{ box-sizing: border-box; display: block; width: 100%; height: 34px; padding: 6px 12px; font-size: 14px;line-height: 1.42857143;color: #555;background-color: #fff;background-image: none;border: 1px solid #ccc; border-radius: 4px;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);box-shadow: inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+        .form-control:focus{border-color: #66afe9;outline: 0;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);}
+        .sex-radios label{ margin: 0px 15px 0px 0px; }
+        
+            /* 新增表单 */
+        .add-btn-wrap{ display:inline-block; width:480px; padding: 25px 15px 15px 0px;margin: 15px 15px 15px 0px;}
+
+        .speeddial{ width: 177px; height: 160px; cursor: pointer; margin:15px; overflow: hidden; background-color: rgba(255,255,255,.2); -webkit-transition: left .3s,top .3s; transition: left .3s,top .3s; box-shadow: 0 6px 5px rgba(0,0,0,.1),0 2px 2px rgba(0,0,0,.1); opacity: 1; border-radius: 4px; background-position: 50%; background-size: cover; background-repeat: no-repeat; background-origin: border-box;}
+        .add-btn{ display: inline-block; background: rgba(228,233,233,.45); color: #d1d5d5; text-align: center; font-size: 75px; line-height: 148px; }
+        .speeddial .speeddial-inner{ width: 100%; height: 100%; background-size: cover; border-radius: 4px;}
+        .speeddial:hover{ color: #ff8000;-webkit-transform: scale(1.02) translateZ(0);transform: scale(1.02) translateZ(0);}
+        
+            /* 最后表格 */
+        .result-form-panel{ border: 1px solid #ddd; text-align:center; padding:10px; margin:10px auto; width:90%; }
+        .table-h{ color: blue; font-weight: bold; }
+        .table-h td{ width:20%; }
+        .result-form-panel table{ width:100%; border:1px solid #ccc; border-collapse: collapse; }
+        .result-form-panel tr{ line-height: 2em; border: 1px solid #ccc; }
+        .result-form-panel tr:hover{ background-color: #f5f5f5; }
+        .result-form-panel td{ padding-left:10px; border-left: 1px solid #ccc; }
+        td:first-child{ border-left: 0px; }
+
+        .bs-example-block{ display: block; }
+    </style>
+</head>
+<body>
+    <div id="vue_det">
+		<button class="radius-btn" @click="showType = 1" :class="{active:showType == 1}">注册流程(vue)</button>
+        <button class="radius-btn" @click="showType = 1.1" :class="{active:showType == 1.1}">注册流程(jq)</button>
+        <button class="radius-btn" @click="showType = 2" :class="{active:showType == 2}">购物列表(vue)</button>
+        <button class="radius-btn" @click="showType = 2.1" :class="{active:showType == 2.1}">购物列表(jq)</button>
+        <button class="radius-btn" @click="showType = 3" :class="{active:showType == 3}">提交表单(vue)</button>
+        <button class="radius-btn" @click="showType = 3.1" :class="{active:showType == 3.1}">提交表单(jq)</button>
+
+        <div class="demo-panel" v-show="showType == 1">
+            <h1 class="register-demo">1.注册流程(vue)</h1>
+            <!-- 注册流程 -->
+            <div class="layout">
+                <div class="n-frame">
+                    <div class="title-item dis_bot35 t_c">
+                        <h4 class="title-big">注册账号</h4>
+                    </div>
+                    <div>
+                        <!-- 步骤一 -->
+                        <div class="regbox" v-show="demo1.step == 1">
+                            <div>
+                                <div>
+                                    <div class="listtit" id="reg-phone-select-cty">
+                                        <span class="tits dis_box c_b">
+                                          <span id="select-cycode-result">中国+86</span>
+                                          <i class="icon_cirarr"></i>
+                                        </span>
+                                      </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label>
+                                    <input type="tel" name="phone" value="12334459999" data-type="PH" placeholder="请输入手机号码">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="labelbox">
+                                    <input class="code" type="text" name="icode" value="vc6qu3" autocomplete="off" placeholder="图片验证码">
+                                </label>
+                                <img alt="图片验证码" title="看不清换一张" class="chkcode_img" style="width:40px;height: 40px;" src="./images/miCode.jpg">
+                            </div>
+                            <div>
+                                <input class="btn332 btn_reg_1" id="submit-step" data-to="phone-step2" type="submit" value="立即注册" @click="demo1.step = 2">
+                            </div>
+                        </div>
+                        <!-- 步骤二 -->
+                        <div class="regbox" v-show="demo1.step == 2">
+                            <div>
+                                <div>
+                                    <p>我们已经发送一条验证短信至 <span class="address-place">+852 12334459999</span></p>
+                                    <p>请输入短信中的验证码</p>
+                                </div>
+                                <div>
+                                    <label class="labelbox wap_resend_label">
+                                        <input class="resendcode" type="text" placeholder="请输入验证码" value="3344" name="ticket">
+                                    </label>
+                                    <span class="remain"><a class="color333 send-status" href="javascript:void(0)">重新发送</a></span>
+                                </div>
+                                <div class="fixed_bot mar_phone_dis2">
+                                    <input class="btn332 btn_reg_1  submit-step" type="submit" value="下一步" @click="demo1.step = 3" />
+                                    <input class="btn332 btn_reg_2  change-view" data-to="phone-step1" type="button" value="返回" @click="demo1.step = 1" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 步骤三 -->
+                        <div class="regbox" v-show="demo1.step == 3">
+                            <div>
+                                <div>
+                                    <div class="single_imgarea">
+                                        <div class="na-img-area marauto cursor_d">
+                                            <div class="na-img-bg-area "></div>
+                                        </div>
+                                        <p class="us_name us-userName">xxdxxdx</p>
+                                        <p class="us_id us-userId">277XX55</p>
+                                    </div>
+                                    <div class="pt10 pb40 t_c">这个帐号是你的吗？</div>
+                                </div>
+                                <div class="fixed_bot">
+                                    <a class="btn332 btn_reg_2 submit-token-login" href="javascrip:void(0);" @click="demo1.step = 6">是我的，直接登录</a>
+                                    <input class="btn332 btn_reg_2  change-view" type="button" value="不是我的，注册新帐号" @click="demo1.step = 4"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 步骤四 -->
+                        <div class="regbox" v-show="demo1.step == 4">
+                            <div class="step3 phone_step3">
+                                <dl>
+                                    <dt>
+                                    <h4>
+                                        您注册的手机号为<span class="register-ph-num">13535XXXXXXX</span>
+                                    </h4>
+                                    <h4>请设置您的密码：</h4>
+                                    </dt>
+                                    <dd>
+                                        <div class="inputbg">
+                                            <label class="labelbox" for="">
+                                                <input class="set-password" type="password" data-error=".error-password" name="password" placeholder="请输入密码" value="123" />
+                                            </label>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <div class="inputbg">
+                                            <label class="labelbox" for="">
+                                                <input name="repassword" type="password" data-repeat=".set-password" data-error=".error-password" placeholder="请输入确认密码" value="123"/>
+                                            </label>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <div class="fixed_bot mar_phone_dis3">
+                                    <input class="btn332 btn_reg_1 submit-step" type="submit" value="提交" @click="demo1.step = 5" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 步骤5 -->
+                        <div class="regbox" v-show="demo1.step == 5">
+                            <div class="phone_step4">
+                            <div class="t_c n_succ">
+                                <img class="dis_none" width="68" height="68" src="./images/succ.jpg" alt="">
+                                <h4>注册成功! </h4>
+                                <div class="fixed_bot mar_phone_dis4">
+                                <a class="btn332 btn_reg_1 login-redirect" @click="demo1.step=6" href="javascript:void(0);">
+                                    登录
+                                </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- 步骤6 -->
+                        <div class="regbox" v-show="demo1.step == 6">
+                            <div class="phone_step4">
+                            <div class="t_c n_succ">
+                                <img class="dis_none" width="68" height="68" src="./images/succ.jpg" alt="">
+                                <h4>登陆成功! </h4>
+                                <div class="fixed_bot mar_phone_dis4">
+                                <a class="btn332 btn_reg_1 login-redirect" @click="demo1.step=1" href="javascript:void(0);">
+                                    返回注册
+                                </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="demo-panel" v-show="showType == 1.1" id="regDemo">
+            <h1>1.1注册流程（jq） </h1>
+            <div class="process-regs fix">
+                <div class="process-reg active" id="proReg1">填写手机号</div>
+                <div class="process-reg" id="proReg2" >输入验证码</div>
+                <div class="process-reg" id="proReg3" >设置密码</div>
+                <div class="process-reg" id="proReg4" >立即注册</div>
+            </div>
+    
+            <div class="btn-list">
+                <button class="btn-radius  active" id="stepBtn1" >提交手机号</button>
+                <button class="btn-radius" id="stepBtn2" >提交验证码</button>
+                <button class="btn-radius" id="stepBtn3" >提交密码</button>
+                <button class="btn-radius" id="stepBtn4" >确认注册成功</button>
+            </div>
+        </div>
+
+
+        <div class="demo-panel" v-show="showType == 2">
+            <h1 class="buy-list-demo">2.购物列表(vue)</h1>
+            <div>
+                <form class="buy-list" v-show="demo2.step == 1">
+                    <fieldset>
+                      <legend>购物车列表</legend>
+                    </fieldset>
+                    <ul>
+                        <li v-for="good in demo2.goodList" >
+                            <input type="checkbox" v-model="good.selected" :name="good.id" class="sel_box" />
+                            <label class="good-label">{{good.name}}</label>
+                            <label>{{good.price}}元</label>
+                            <div class="good-set">
+                                <a href="javascript:void(0);" class="set-min" v-show="good.count <= 1">&nbsp;</a>
+                                <a href="javascript:void(0);" class="set-min" v-show="good.count > 1" @click="minGoodCount(good.id)">-</a>
+                                <input type="text" v-model="good.count" @blur="editCount(good)" onkeydown="if(event.keyCode==13) return false;" class="set-count" />
+                                <a href="javascript:void(0);" class="set-add" @click="addGoodCount(good.id)">+</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="buy-list-f">
+                        <div class="good-total" >{{totalPrice | format}}</div>
+                        <button class="radius-btn" @click="confirmOrder()">去支付</button> 
+                        <!-- confirmOrder(event)可加可不加 -->
+                    </div>
+                </form>
+
+                <form class="buy-list" v-show="demo2.step == 2">
+                    <fieldset>
+                        <legend>确认订单</legend>
+                    </fieldset>
+                    <ul>
+                        <li v-for="good in demo2.selectedList" >
+                            <label class="good-label">{{good.name}}</label>
+                            <label>${{good.price}}元</label>
+                            <label>X {{good.count}}</label>
+                        </li>
+                        <p class="con-l-total">总价格 ￥<span>{{totalPrice}}</span></p>
+                    </ul>
+                    <div class="confirm-list-f">
+                        <button class="radius-btn btn-l" @click="goBack()">返回</button>
+                        <button class="radius-btn btn-r" @click="submitOrder()">提交订单</button>
+                    </div>
+                </form>
+
+                <form class="buy-list buy-list-tip" v-show="demo2.step == 3">
+                    <div class="tip-img"><img class="dis_none" width="68" height="68" src="./images/succ.jpg" alt=""></div>
+                    <span>提交订单成功！</span>
+                    <button class="radius-btn btn-l" @click="goBack()">返回</button>
+                </form>
+                
+            </div>
+
+        </div>
+
+
+        <div class="demo-panel" v-show="showType == 2.1">
+            <h1 class="buy-list-demo">2.1购物列表(jq)</h1>
+            <div>
+                <form class="buy-list" id="buyStep1">
+                    <fieldset>
+                      <legend>购物车列表</legend>
+                    </fieldset>
+                    <ul>
+                        <li data-price="45" data-gId="good1">
+                            <input type="checkbox" class="sel_box" />
+                            <label class="good-label">商品1</label>
+                            <label>45元</label>
+                            <div class="good-set">
+                                <a href="javascript:void(0);" class="set-min">&nbsp;</a>
+                                <input type="text" class="set-count" value="1" />
+                                <a href="javascript:void(0);" class="set-add">+</a>
+                            </div>
+                        </li>
+                        <li data-price="56" data-gId="good2">
+                            <input type="checkbox" class="sel_box"/>
+                            <label class="good-label">商品2</label>
+                            <label>56元</label>
+                            <div class="good-set">
+                                <a href="javascript:void(0);" class="set-min">&nbsp;</a>
+                                <input type="text" class="set-count" value="1" />
+                                <a href="javascript:void(0);" class="set-add">+</a>
+                            </div>
+                        </li>
+                        <li data-price="30" data-gId="good3">
+                            <input type="checkbox" class="sel_box" />
+                            <label class="good-label">商品3</label>
+                            <label>30元</label>
+                            <div class="good-set">
+                                <a href="javascript:void(0);" class="set-min">&nbsp;</a>
+                                <input type="text" class="set-count" value="1" />
+                                <a href="javascript:void(0);" class="set-add">+</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="buy-list-f">
+                        <div class="good-total" >0.00</div>
+                        <button class="radius-btn" id="goBuy">去支付</button> 
+                        <!-- confirmOrder(event)可加可不加 -->
+                    </div>
+                </form>
+
+                <form class="buy-list" id="buyStep2">
+                    <fieldset>
+                        <legend>确认订单</legend>
+                    </fieldset>
+                    <ul>
+                        <li>
+                            <span class="con-l-label">商品2</span> <span class="con-l-label">$45</span>
+                            X <span class="con-l-count">3</span>
+                        </li>
+                        <li>
+                            <span class="con-l-label">商品3</span> <span class="con-l-label">$75</span>
+                            X <span class="con-l-count">2</span>
+                          </li>
+                    </ul>
+                    <div class="confirm-list-f">
+                        <button type="button" class="radius-btn btn-l goBack">返回</button>
+                        <button type="button" class="radius-btn btn-r" id="submitOrder">提交订单</button>
+                    </div>
+                </form>
+
+                <form class="buy-list buy-list-tip" id="buyStep3">
+                    <div class="tip-img"><img class="dis_none" width="68" height="68" src="./images/succ.jpg" alt=""></div>
+                    <span>提交订单成功！</span>
+                    <button type="button" class="radius-btn btn-l goBack">返回</button>
+                </form>
+                
+            </div>
+            
+        </div>
+
+
+        <div class="demo-panel form-demo" v-show="showType == 3">
+            <div class="add-form-panel" v-show="demo3.step == 1">
+                <h1 class="form-demo">3提交表单(vue)</h1>
+                <div class="bs-example-wrap-v">
+                    <div class="bs-example" v-for="formData in demo3.formList">
+                        <form id="bsForm1">
+                            <div class="form-group">
+                                <label for="name">姓名:</label>
+                                <input class="form-control" v-model="formData.userName" name="userName" placeholder="填写姓名">
+                            </div>
+                            <div class="form-group">
+                                <!-- 如果在label 元素内点击文本，就会触发此控件，也就是说，当用户渲染该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。 -->
+                                    <!-- 方法一：将表单控件作为label的内容，这种就是隐士绑定。 -->
+                                    <!-- 此时不需要for属性，绑定的控件也不需要id属性。 -->
+                                <label for="sex">性别:</label>
+                                <div class="sex-radios">
+                                    <!-- checked 属性规定在页面【加载时】应该被预先选定的 <input> 元素。 -->
+                                    <!-- checked 属性适用于 <input type="checkbox"> 和 <input type="radio">。 -->
+                                        
+                                    <label>
+                                        <input type="radio" name="sex" value="男" v-model="formData.sex" checked>
+                                        男
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sex" value="女" v-model="formData.sex">
+                                        女
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>工号:</label>
+                                <input class="form-control" name="jobId" v-model="formData.jobId" placeholder="填写工号">
+                            </div>
+                            <div class="form-group">
+                                <label>身份证号:</label>
+                                <input class="form-control" name="userId" v-model="formData.userId" placeholder="填写身份证">
+                            </div>
+                            <div class="form-group">
+                                <label>手机号:</label>
+                                <input class="form-control" name="mobile" v-model="formData.mobile" placeholder="填写手机号">
+                            </div>
+                        </form>
+                    </div>
+        
+                    <div class="add-btn-wrap" v-show="demo3.formList.length < 3">
+                        <div class="speeddial  add-btn" title="新增表单" @click="addForm()">
+                            <div class="speeddial-inner">
+                                <div class="addBtn-icon">+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input class="btn332 btn_reg_1" readonly="true" value="提交" @click="demo3.step = 2">
+                </div>
+            </div>
+            <div class="result-form-panel" v-show="demo3.step == 2">
+                <h1>提交成功</h1>
+                <table class="table-panel" id="table_2">
+                    <tr class="table-h">
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>工号</td>
+                        <td>身份证</td>
+                        <td>手机号</td>
+                    </tr>
+                    <tr class="user-tr" v-for="formData in demo3.formList">
+                        <td v-text="formData.userName"></td>
+                        <td v-text="formData.sex"></td>
+                        <td v-text="formData.jobId"></td>
+                        <td v-text="formData.userId"></td>
+                        <td v-text="formData.mobile"></td>
+                    </tr>
+                </table>
+                <div>
+                    <input class="btn332 btn_reg_1" readonly="true" @click="demo3.step = 1" value="返回">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="demo-panel form-demo" id="formDemo" v-show="showType == 3.1">
+            <div class="add-form-panel" id="addFormPanel">
+                <p>登高参赛报名申请， 提交表单：1~3；超过一张表单提交的成员会成为一队，不足3人则与其他队伍随机匹配</p>
+                <h1 class="form-demo">3.1提交表单(jq)</h1>
+                <div class="bs-example-wrap">
+                    <div class="bs-example" data-no="1">
+                        <form id="bsForm1">
+                            <div class="form-group">
+                                <label for="name">姓名:</label>
+                                <input class="form-control" name="userName" placeholder="填写姓名">
+                            </div>
+                            <div class="form-group">
+                                <label for="sex">性别:</label>
+                                <div class="sex-radios">
+                                    <label>
+                                        <input type="radio" name="sex" value="男" >
+                                        男
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="sex" value="女" checked>
+                                        女
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>工号:</label>
+                                <input class="form-control" name="jobId" placeholder="填写工号">
+                            </div>
+                            <div class="form-group">
+                                <label>身份证号:</label>
+                                <input class="form-control" name="userId" placeholder="填写身份证">
+                            </div>
+                            <div class="form-group">
+                                <label>手机号:</label>
+                                <input class="form-control" name="mobile" placeholder="填写手机号">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    <div class="speeddial  add-btn" title="新增表单">
+                        <div class="speeddial-inner">
+                            <div class="addBtn-icon">+</div>
+                        </div>
+                    </div>
+                <div>
+                    <input class="btn332 btn_reg_1" id="subForm" readonly="true" value="提交">
+                </div>
+            </div>
+                <div class="result-form-panel" id="resultForm">
+                    <h1>提交成功</h1>
+                    <table class="table-panel" id="table_2">
+                        <tr class="table-h">
+                            <td>姓名</td>
+                            <td>性别</td>
+                            <td>工号</td>
+                            <td>身份证</td>
+                            <td>手机号</td>
+                        </tr>
+                    </table>
+                    <div>
+                        <input class="btn332 btn_reg_1" readonly="true" id="backForm" value="返回">
+                    </div>
+                </div>
+        </div>
+
+        
+        <!-- https://www.jianshu.com/p/3f0ee1f6ec30 -->
+        <!-- 点击后顺序：一、事件捕获：从最外面以次传递到最里面的后代div 1 4;二、 事件冒泡 从最里层的div 以次传出3 2  -->
+        <!-- 使用了Vue框架，通过事件装饰来区分捕获与冒泡。 -->
+        <!-- <div @click.capture="console.log(1)" style="background-color: black;"> 
+            <div @click="console.log(2)" style="background-color: rgb(80, 50, 50);"> 
+                <div @click="console.log(3)" style="background-color: rgb(177, 71, 71);"> 
+                    <div @click.capture="console.log(4)" style="background-color: rgb(247, 243, 243);"> 
+                    点击这里
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- 333 111 -->
+        <!-- <form>
+            <div @click="console.log(111)">jsopdf
+                <button @click="console.log(222)">##</button>
+                <div>1233
+                    <button @click="console.log(333)">%%%</button>
+                </div>
+            </div>
+        </form> -->
+
+        <!-- 1.button 对象的 type 属性有 submit、button、reset 三种类型，默认是 submit。
+        所以不加 type="button" 的时候回车当做 submit 调用。会默认提交事件。如果表单的action为空也会跳转到自己的页面，即效果为刷新当前页。
+        解决：给button加上type="button"；
+        （1）将<input>标签内按钮类型从type="submit"修改为type="button"
+        （2）表单内的<button>未指定类型时，默认的类型为submit，可以显式的修改为<button type="button">来阻止表单提交
+        （3）利用preventDefault()方法
+        2.input 框键盘回车键按下也会默认提交事件 input获得焦点时按回车会form自动提交
+        解决：监听 input 的 keydown 事件，回车键按下，则阻止默认事件
+        https://yunan.blog.csdn.net/article/details/109624591
+
+        <form action="/demo/demo_form.asp">
+            First name:<br>
+            <input type="text" name="firstname" value="Mickey" onkeydown="keydown(event)">
+            <button type="button" onclick="changeText('button')">button</button>
+            <br>
+            Last name:<br>
+            <input type="text" name="lastname" value="Mouse">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>  -->
+        
+        
+	</div>
+    <script type="text/javascript" src="./vue1.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script> -->
+    <script type="text/javascript" src="./base.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    
+    
+    <script type="text/javascript">
+        // function changeText(str) {
+        //     alert(str);
+        // }
+        // function keydown(event) {
+        //     if(event.key === 'Enter'){
+        //         event.preventDefault();
+        //     }
+        // }
+        
+        var xq = {};
+
+        // 阻止默认事件(原生js)
+        function preventDefault(event) {
+            var event = EventUtil.getEvent();
+            EventUtil.preventDefault(event);
+            EventUtil.stopPropagation(event);
+            return false;
+        }
+
+        Vue.filter('format', val => {
+                return '$' + val.toFixed(2); 
+        });
+
+        init();
+        function init() {
+            var vm = new Vue({
+                el:'#vue_det',
+                data:{
+                    showType:3,
+                    demo1: {
+                        step:1,
+                    },
+                    demo2: {
+                        step:1,
+                        goodList:[ 
+                            {name:'商品1', price:'45', id:'good1', count: 1, selected: false},
+                            {'name':'商品2', 'price':'56', 'id':'good2', 'count': 1, 'selected': false},
+                            {'name':'商品3', 'price':'30', 'id':'good3', 'count': 1, 'selected': false}
+                        ],
+                        selectedList: []
+                    },
+                    demo3: {
+                        'step': 1,
+                        formList: [{'userName':'', 'sex':'女', 'jobId':'', 'userId':'', 'mobile': ''}]
+                    },
+                },
+                methods: {
+                    minGoodCount(id) {
+                        this.demo2.goodList.map((item) => {
+                            if(item.id == id) {
+                                if (item.price > 1) {
+                                    item.count--;
+                                    item.selected = true;
+                                    
+                                } else {
+                                    return 
+                                }
+                            }
+                        })
+                    },
+                    addGoodCount(id) {
+                        this.demo2.goodList.map((item) => {
+                            if(item.id == id) {
+                                item.count++;
+                                item.selected = true;
+                            }
+                        })
+                    },
+                    editCount(good) {
+                        if (good.count < 1 || isNaN(Number(good.count))) {
+                            good.count = 1;
+                        } else {
+                            good.selected = true;
+                        }
+                    },
+                    confirmOrder(event) {
+                        console.log(this.totalPrice)
+                        if (this.totalPrice == 0) {
+                            alert('请选择购买的商品。');
+                        } else {
+                            // this.demo2.goodList.map(item => { 错误，input会再次把选中的商品加入进selectList 中
+                            //     if(item.selected) {
+                            //         this.demo2.selectedList.push(item)
+                            //     }
+                            // })
+                            this.demo2.step = 2;
+                        }
+                        preventDefault(event); // 阻止button默认submit事件
+                    },
+                    goBack(event) {
+                        this.demo2.step = 1;
+                        preventDefault(event);
+                    },
+                    submitOrder(event) {
+                        this.demo2.step = 3;
+                        preventDefault(event);
+                    },
+                    
+                    addForm() {
+                        var formObj = {
+                            'userName': '',
+                            'sex': '女',
+                            'userId': '',
+                            'jobId': '',
+                            'mobile': ''
+                        };
+                        this.demo3.formList.push(formObj);
+                    }
+                },
+                computed: {
+                    totalPrice() {
+                        this.demo2.selectedList = []; //先清除列表
+                        var res = 0;
+                        this.demo2.goodList.map(item => {
+                            if (item.selected) {
+                                this.demo2.selectedList.push(item) 
+                                res += (Number(item.price) * item.count)
+                            }
+                        })
+                        return res;
+                    }
+                }
+
+            })
+            xq.vm = vm;
+        }
+
+        //jQuery 代码
+        $(function() {
+
+            
+            //注册1.1
+            function registInit(){
+            
+                var $regDemo = $('#regDemo'),
+                    $stepBtn1 = $regDemo.find('#stepBtn1'),
+                    $stepBtn2 = $regDemo.find('#stepBtn2'),
+                    $stepBtn3 = $('#stepBtn3'),
+                    $stepBtn4 = $('#stepBtn4');
+
+                $stepBtn1.on('click', submitMobile);
+                $stepBtn2.on('click', submitAuthCode);
+                $stepBtn3.on('click', submitPas);
+                $stepBtn4.on('click', submitReg);
+                function submitMobile() {
+                    $regDemo.find('.process-reg').removeClass('active');
+                    $regDemo.find('#proReg2').addClass('active');
+                    $stepBtn1.hide();
+                    $stepBtn2.show();
+                }
+                function submitAuthCode() {
+                    $regDemo.find('.process-reg').removeClass('active');
+                    $regDemo.find('#proReg3').addClass('active');
+                    $stepBtn2.hide();
+                    $stepBtn3.show();
+                }
+                function submitPas() {
+                    $('.process-reg').removeClass('active'); //和find一样的
+                    $('#proReg4').addClass('active');
+                    $stepBtn3.removeClass('active'); // 和hide() 一样的
+                    $stepBtn4.addClass('active');
+                   
+                }
+                function submitReg() {
+                    $regDemo.find('.process-reg').removeClass('active');
+                    $regDemo.find('#proReg1').addClass('active');
+                    $stepBtn4.hide();
+                    $stepBtn1.show();
+                }
+            }
+            //注册1.1
+            registInit();
+
+            // 购物列表(2.1 )
+            var BuyList = {
+                $buyList: null,
+                $buyStep1:null,
+                $buyStep2: null,
+                $buyStep3: null,
+                init() {
+                    var that = this;
+                    this.$buyList = $('.buy-list');
+                    this.$buyStep1 = $('#buyStep1');
+                    this.$buyStep2 = $('#buyStep2');
+                    this.$buyStep3 = $('#buyStep3');
+                    
+                    this.$buyStep2.hide();
+                    this.$buyStep3.hide();
+                    this.initEvt();
+                },
+                // 点击选中， 重新计算总价
+                refreshPrice() {
+                    var totalPrice = 0.00,
+                        $ul = this.$buyStep1.find('ul');
+
+                    $ul.find('li').each(function(i, n){
+                        var $li = $(n),
+                            price = parseInt($li.attr('data-price')), // .attr获取值
+                            count = parseInt($li.find('.set-count').val(), 10);
+                            console.log(price,count)
+                        if ($li.find('.sel_box').is(':checked')) {
+                            totalPrice += price * count;
+                        }
+                    });
+                    this.$buyStep1.find('.good-total').text(totalPrice.toFixed(2))
+                },
+                renderOrderList () {
+                    var $ul = this.$buyStep2.find('ul'),
+                        $buyUl = this.$buyStep1.find('ul'),
+                        goodList = [],
+                        totalPrice = this.$buyStep1.find('.good-total').text(),
+                        htmlStr = '';
+
+                    $buyUl.find('li').each((i, n) => {
+                        var $li = $(n),
+                            goodId = $li.attr('data-gId'),
+                            price = parseInt($li.attr('data-price')),
+                            name = $li.find('.good-label').text(),
+                            count = parseInt($li.find('.set-count').val(), 10),
+                            goodObj = {};
+                        
+                        goodObj = {
+                            id: goodId,
+                            price: price,
+                            goodName: name,
+                            count:count
+                        };
+            
+                        if( $li.find('.sel_box').is(':checked')) {
+                            goodList.push(goodObj);
+                        }
+                    })
+
+                    $ul.empty();
+                    $ul.next('.con-l-total').remove();
+                    this.$buyStep1.hide();
+                    this.$buyStep2.show();
+
+                    for(let i=0; i < goodList.length;i++) {
+                        goodObj = goodList[i];
+                        htmlStr += '<li data-gId="' + goodObj.id + '">' + 
+                            '<span class="con-l-label">' + goodObj.goodName + '</span>' +
+                              '<span class="con-l-label">$' + goodObj.price + '</span>' +
+                              'X <span class="con-l-count">' + goodObj.count + '</span>' +
+                          '</li>';
+                    }
+                    $ul.append(htmlStr);
+                    $ul.append('<p class="con-l-total">总价格 ￥' + totalPrice + '</p>');
+                    
+                },
+                goStep1() {
+                    this.$buyStep2.hide();
+                    this.$buyStep3.hide();
+                    this.$buyStep1.show();
+                },
+                initEvt() {
+                    var that = this;
+                    $('.sel_box').on('click', selGood);
+                    this.$buyStep1.find('.set-add').on('click', addGoodCount);
+                    this.$buyStep1.find('.set-min').on('click', minGoodCount);
+                    this.$buyStep1.find('.set-count').on('blur', inputBlur);
+                    this.$buyStep1.find('#goBuy').on('click', confirmOrder);
+
+                    $('.buy-list').find('.goBack').on('click', goBack);
+                    this.$buyStep2.find('#submitOrder').on('click', submitOrder);
+
+                    function selGood() {
+                        that.refreshPrice();
+                    };
+                    function addGoodCount(e) { // 在这里jq 采用 e 的值来取得其他相关div元素
+                        var $this = $(this),
+                            $input = $this.prev('input'),
+                            $minBtn = $this.siblings('.set-min'),
+                            $selBox = $this.parents('li').find('.sel_box');
+                        
+                        var inputVal = parseInt($input.val(), 10);
+                        inputVal++;
+                        if ( inputVal > 1 ) {
+                            $minBtn.html('-')
+                        }
+                        $input.val(inputVal);
+                        if ( !$selBox.is(':checked') ) {
+                            $selBox.trigger('click'); //出发选项的click 事件，选中。
+                        } else {
+                            that.refreshPrice();
+                        }
+                    };
+                    function minGoodCount(e) {
+                        var $this = $(this),
+                            $input = $this.next('input'),
+                            $selBox = $this.parents('li').find('.sel_box');
+                        
+                        var inputVal = parseInt($input.val(), 10);
+                        if (inputVal <= 1) {
+                            return false;
+                        } 
+                        inputVal--;
+                        if ( inputVal <= 1) {
+                            $this.html('&nbsp;');
+                        }
+                        $input.val(inputVal);
+                        if ( !$selBox.is(':checked') ) {
+                            $selBox.trigger('click'); //出发选项的click 事件，选中。
+                        } else {
+                            that.refreshPrice();
+                        }
+                    };
+                    function inputBlur(e) {
+                        var $this = $(this),
+                            inputVal = $this.val(),
+                            $selBox = $this.parents('li').find('.sel_box'),
+                            $minBtn = $this.siblings('.set-min');
+
+                        if (!inputVal || isNaN(Number(inputVal))) {
+                            $this.val(1);
+                            alert('should be a number.');
+                            return false;
+                        }
+                        if(inputVal > 1) {
+                            $minBtn.html('-')
+                        } else {
+                            $minBtn.html('&nbsp;');
+                        }
+                        if ( !$selBox.is(':checked') ) {
+                            $selBox.trigger('click'); //出发选项的click 事件，选中。
+                        } else {
+                            that.refreshPrice();
+                        }
+                    };
+                    function confirmOrder() {
+                        if(parseInt(that.$buyStep1.find('.good-total').text(),10) == 0) {
+                            alert('please select your goods.');
+                            return false;
+                        }
+                        that.renderOrderList();
+                        return false; // 阻止默认事件， 会跳转可能是其他代码有错误
+                    }
+                    function goBack() {
+                        that.goStep1();
+                        return false;
+                    }
+                        // 提交订单
+                    function submitOrder(e){
+                        that.$buyStep2.hide();
+                        that.$buyStep3.show();
+                        return false;
+                    }
+                }
+            }
+            // 购买列表2.1相关代码 初始化对象
+            BuyList.init();
+
+            // 提交表单（3.1）
+            var submitForm = {
+                $formPanel:null,
+                $addBtn: null,
+                $subForm: null,
+                $resultForm: null,
+                init() {
+                    var that = this;
+                    this.$formPanel = $('#formDemo');
+                    this.$addBtn = $('#formDemo').find('.add-btn');
+                    this.$subForm = $('#formDemo').find('#subForm');
+                    this.$addFormPanel = $('#formDemo').find('#addFormPanel');
+                    this.$resultForm = $('#formDemo').find('#resultForm');
+                    this.$backBtn = $('#formDemo').find('#backForm');
+                    this.$resultForm.hide();
+                    this.initEvt();
+                },
+                initEvt() {
+                    var that = this;
+                    this.$addBtn.on('click', function(){
+                        that.addForm();
+                    });
+                    this.$subForm.on('click', function() {
+                        that.subForm();
+                    });
+                    this.$backBtn.on('click', function(){
+                        that.backForm();
+                    })
+                },
+                addForm() {
+                    var formStr = '',
+                        This = this,
+                        formNo = 0,
+                        $formWrap = this.$formPanel.find('.bs-example-wrap:last');
+                    forNo = parseInt($formWrap.find('.bs-example:last').attr('data-no'), 10);
+                    formNo = formNo + 1;
+                    // 表单容器换行，2 个就要换行
+                    if( $formWrap.find('.bs-example').length > 1) {
+                        $formWrap.after('<div class="bs-example-wrap"></div>');
+                        $formWrap = this.$formPanel.find('.bs-example-wrap:last');
+                    } else {
+                        $formWrap.addClass('bs-example-block'); // display: block;
+                    }
+                    formStr = '<div class="bs-example" data-no="' + formNo + '"><form id="bsForm' + formNo + '"><div class="form-group"><label for="name">姓名:</label><input class="form-control" name="userName" placeholder="填写姓名" /></div><div class="form-group"><label for="sex">性别:</label><div class="sex-radios"><label><input type="radio" name="sex" value="男" checked>                      男</label><label><input type="radio" name="sex" value="女">                      女</label></div></div><div class="form-group"><label>工号:</label><input class="form-control" name="jobId" placeholder="填写工号" /></div><div class="form-group"><label>身份证号:</label><input class="form-control" name="userId" placeholder="填写身份证" /></div><div class="form-group"><label>手机号:</label><input class="form-control" name="mobile" placeholder="填写手机号" /></div></form></div>';
+                    $formWrap.append(formStr);
+                    // 最多三个表单
+                    if ( formNo >= 3) {
+                        this.$addBtn.hide();
+                    }
+                },
+                subForm(){
+                    var formDatas = [], i, len, formObj, trStr = '', trList = '';
+                    // 获取表单数据
+                    this.$formPanel.find('form').each(function(index, domEle){
+                        var formDom = domEle,
+                            i, len, sexVal,
+                            formObj = {};
+                        for(i = 0, len = formDom.sex.length; i <len; i++) {
+                        if (formDom.sex[i].checked) {
+                            sexVal = formDom.sex[i].value;
+                            break;
+                        }
+                        }
+                        formObj = {
+                        'userName': formDom.userName.value,
+                        'sex': sexVal,
+                        'jobId': formDom.jobId.value,
+                        'userId': formDom.userId.value,
+                        'mobile': formDom.mobile.value
+                        };
+                        formDatas.push(formObj);
+                    });
+                    // 将用户填写的数据 填入新表格
+                    for (i = 0, len = formDatas.length; i < len; i++) {
+                        formObj = formDatas[i];
+                        trStr = '<tr class="user-tr">' +
+                        '<td>' + formObj.userName + '</td>' +
+                        '<td>' + formObj.sex + '</td>' +
+                        '<td>' + formObj.jobId + '</td>' +
+                        '<td>' + formObj.userId + '</td>' +
+                        '<td>' + formObj.mobile + '</td>' +
+                        '</tr>';
+                        trList += trStr;
+                    }
+                    this.$resultForm.find('#table_2').find('tr.user-tr').remove();
+                    this.$resultForm.find('#table_2').find('tbody').append(trList);
+                    this.$resultForm.show();
+                    this.$addFormPanel.hide();
+                },
+                backForm(){
+                    this.$resultForm.hide();
+                    this.$addFormPanel.show();
+                }
+            };
+          submitForm.init();
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paser</title>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./my-compile.js"></script>
+    <script>
+        $(function() {
+            let t1 = tokenizer('(add 2 (subtract 4 2))');
+            let ast = parser(t1);
+            let newast = transformer(ast);
+            let code = codeGenerator(newast);
+            $('#div1').text(JSON.stringify(t1));
+            $('#div2').text(JSON.stringify(ast));
+            $('#div3').text(JSON.stringify(newast));
+            $('#div4').text(JSON.stringify(code));
+
+        })
+    </script>
+</head>
+<body>
+    <h1>test</h1>
+    <div id="div1"></div><br><br>
+    <div id="div2"></div><br><br>
+    <div id="div3"></div><br><br>
+    <div id="div4"></div><br><br>
+</body>
+</html>
